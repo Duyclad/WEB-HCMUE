@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 Dieu, Cuong, Duyyyyyyy.... hello
+=======
+html
+css
+...
+>>>>>>> 4f435e29d72ddcde4ca8ba42099fb05bf9f02221
