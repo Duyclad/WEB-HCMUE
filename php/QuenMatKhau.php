@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Đăng kí - Gonz</title>
+	<title>Quên mật khẩu - Gonz</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
-    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  
-    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">  
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="../css/style.css" rel="stylesheet">
+  
 </head>
-<body>
+<body> 
     <header class="header sticky-top " style="background-color: rgba(245, 125, 125, 0.521);">
         <div class="header__top">
             <div class="container">
@@ -130,46 +129,22 @@
 		</div>
 	</div>
 </div>
+<hr>	
+<div class="elelment">
+	<div class="element-main">
+		<h1 style="color: rgb(255, 37, 164);">Quên mật khẩu</h1>
+		<p style="font-size: 24px;">Nhập Số điện thoại và chúng tôi sẽ gửi mật khẩu mới vào Số điện thoại của bạn trong thời gian sớm nhất!</p>
+		<form method="POST" action="checkQuenMatKhau.php">
+			<input type="text" name="phone" placeholder="Số điện thoại của bạn">
+            <input type="submit" name="submit" value="Khôi phục tài khoản">
+            <h4 style="margin-top: 20px;" >
+                Trở lại <a href="DangNhap.php" class="loginhere-link">Đăng nhập</a>
+            </h4>
+		</form>
+	</div>
+</div>
 <hr>
-<div class="main">
-
-    <section class="signup">
-       
-        <div class="container">
-            <div class="signup-content">
-                <form method="POST" id="signup-form" action="TrangThaiDangKy.php" class="signup-form">
-                    <h2 class="form-title" style="margin-bottom: 20px;">Tạo tài khoản</h2>
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="name" id="name" placeholder="Tên"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="phone" id="phone" placeholder="Số điện thoại"/>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="address" id="address" placeholder="Địa chỉ của bạn"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-input" name="password" id="password" placeholder="Mật khẩu"/>
-                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu"/>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="submit" name="submit" id="submit" class="form-submit" value="Đăng kí"/>
-                    </div>
-                </form>
-                <h5 class="loginhere">
-                    Đã có tài khoản ? <a href="../html/DangNhap.html" class="loginhere-link">Đăng nhập</a>
-                </h5>
-            </div>
-        </div>
-    </section>
-
-</div><hr>
-
+    
 <footer>
 	<div class="container-fluid padding">	
 		<div class="row text-center">

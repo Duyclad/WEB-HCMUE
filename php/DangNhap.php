@@ -1,21 +1,24 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Đăng kí - Gonz</title>
+	<title>Đăng nhập - Gonz</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
-    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  
-    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">  
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="../css/style.css" rel="stylesheet">
+  
 </head>
-<body>
+<body> 
     <header class="header sticky-top " style="background-color: rgba(245, 125, 125, 0.521);">
         <div class="header__top">
             <div class="container">
@@ -130,46 +133,53 @@
 		</div>
 	</div>
 </div>
-<hr>
-<div class="main">
+<hr>	
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-50 p-b-90">
+            <form class="login100-form validate-form flex-sb flex-w" method="POST" action="TrangChu.php">
+                <span class="login100-form-title p-b-51">
+                    Đăng nhập Gonz
+                </span>
 
-    <section class="signup">
-       
-        <div class="container">
-            <div class="signup-content">
-                <form method="POST" id="signup-form" action="TrangThaiDangKy.php" class="signup-form">
-                    <h2 class="form-title" style="margin-bottom: 20px;">Tạo tài khoản</h2>
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="name" id="name" placeholder="Tên"/>
+                
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Chưa nhập tài khoản">
+                    <input class="input100" type="text" name="username" placeholder="Số điện thoại">
+                    <span class="focus-input100"></span>
+                </div>
+                
+                
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Vui lòng nhập mật khẩu">
+                    <input class="input100" type="password" name="pass" placeholder="Mật khẩu">
+                    <span class="focus-input100"></span>
+                </div>
+                
+                <div class="flex-sb-m w-full p-t-3 p-b-24">
+                    <div class="contact100-form-checkbox">
+
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="phone" id="phone" placeholder="Số điện thoại"/>
+
+                    <div>
+                        <a href="QuenMatKhau.php" class="txt1">
+                            Quên mật khẩu ?
+                        </a>
                     </div>
-                    
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="address" id="address" placeholder="Địa chỉ của bạn"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-input" name="password" id="password" placeholder="Mật khẩu"/>
-                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu"/>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="submit" name="submit" id="submit" class="form-submit" value="Đăng kí"/>
-                    </div>
-                </form>
-                <h5 class="loginhere">
-                    Đã có tài khoản ? <a href="../html/DangNhap.html" class="loginhere-link">Đăng nhập</a>
-                </h5>
-            </div>
+                </div>
+
+                <div class="container-login100-form-btn m-t-17">
+                    <button class="login100-form-btn" name="submit">
+                        Đăng nhập
+                    </button>
+                    <h5 class="loginhere">
+                        Chưa có tài khoản ?  <a href="DangKi.php" class="loginhere-link">Đăng kí</a>
+                    </h5>
+               
+            </form>
         </div>
-    </section>
-
-</div><hr>
-
+    </div>
+</div>
+<hr>
+  
 <footer>
 	<div class="container-fluid padding">	
 		<div class="row text-center">

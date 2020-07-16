@@ -1,10 +1,21 @@
+<?php 
+    session_start();
+
+    $connect = mysqli_connect("localhost","root","","dbgonz_do_an");
+    mysqli_query($connect,"SET NAMES 'utf8'");
+
+    if (isset($_POST['submit'])){
+        if($_POST['password'] == "" && $_POST['new_password'] && $_POST['re_password']){
+            $update = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt' and Matkhau='$Matkhau'");
+        }
+    }
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Đăng kí - Gonz</title>
+	<title>Thay đổi thông tin - Gonz</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  
     <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">  
@@ -39,7 +50,28 @@
                             </div>
                           
                             <div class="header__top__right__auth">
-                                <a href="DangNhap.php"><i class="fa fa-user"></i> Đăng nhập</a>
+                            <?php 
+                                    if (!isset($_SESSION["Sdt"])){
+                                        echo "<a href=\"DangNhap.php\"><i class=\"fa fa-user\"></i> Đăng nhập</a>";
+
+                                    }
+                                    else{
+                                        echo "
+                                       
+                                        
+                                            <a href=\"EditInfo.php\"> <i class=\"fa fa-user\"></i> ".$_SESSION["Tentk"]."</a>
+                                            
+                                           
+                                                <form method=\"POST\" action=\"TrangChu.php\"><button name=\"btnThoat\"> (Đăng xuất)</button></form>
+                                            
+                                            
+                                        
+                                        
+                                       "
+                                         ;
+                                        
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -137,39 +169,42 @@
        
         <div class="container">
             <div class="signup-content">
-                <form method="POST" id="signup-form" action="TrangThaiDangKy.php" class="signup-form">
-                    <h2 class="form-title" style="margin-bottom: 20px;">Tạo tài khoản</h2>
+                <form method="POST" id="signup-form" class="signup-form" action="EditInfo.php">
+                    <h2 class="form-title" style="margin-bottom: 20px;">Thông tin tài khoản</h2>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="name" id="name" placeholder="Tên"/>
+                        <input type="text" class="form-input" name="name" id="name" placeholder="Họ và tên" value="<?php echo $_SESSION["Tentk"]?>"/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="phone" id="phone" placeholder="Số điện thoại"/>
+                        <input type="text" class="form-input" name="phone" id="phone" placeholder="Số điện thoại" value="<?php echo $_SESSION["Sdt"]?>"/>
                     </div>
-                    
+                 
                     <div class="form-group">
-                        <input type="text" class="form-input" name="address" id="address" placeholder="Địa chỉ của bạn"/>
+                        <input type="text" class="form-input" name="address" id="address" placeholder="Địa chỉ" value="<?php echo $_SESSION["Diachi"]?>"/>
                     </div>
+                    <h3 style="margin-bottom: 10px;">Đổi mật khẩu</h3>
                     <div class="form-group">
-                        <input type="password" class="form-input" name="password" id="password" placeholder="Mật khẩu"/>
+                        <input type="text" class="form-input" name="password" id="password" placeholder="Mật khẩu hiện tại"/>
                         <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu"/>
+                        <input type="text" class="form-input" name="new_password" id="new_password" placeholder="Mật khẩu mới"/>
+                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu mới"/>
                     </div>
                     
                     <div class="form-group">
-                        <input type="submit" name="submit" id="submit" class="form-submit" value="Đăng kí"/>
+                        <input type="submit" name="submit" id="submit" class="form-submit" value="Xác nhận thay đổi"/>
                     </div>
                 </form>
-                <h5 class="loginhere">
-                    Đã có tài khoản ? <a href="../html/DangNhap.html" class="loginhere-link">Đăng nhập</a>
-                </h5>
+                
             </div>
         </div>
     </section>
 
 </div><hr>
-
+  
 <footer>
 	<div class="container-fluid padding">	
 		<div class="row text-center">

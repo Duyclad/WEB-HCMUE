@@ -131,39 +131,45 @@
 	</div>
 </div>
 <hr>
-<div class="main">
+<div class="main" >
 
     <section class="signup">
        
         <div class="container">
             <div class="signup-content">
-                <form method="POST" id="signup-form" action="TrangThaiDangKy.php" class="signup-form">
-                    <h2 class="form-title" style="margin-bottom: 20px;">Tạo tài khoản</h2>
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="name" id="name" placeholder="Tên"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="phone" id="phone" placeholder="Số điện thoại"/>
-                    </div>
+                
+            <?php
+                $connect = mysqli_connect("localhost","root","","dbgonz_do_an");
+                mysqli_query($connect,"SET NAMES 'utf8'");
+
+                if (isset($_POST['submit'])){
+                    $Sdt = mysqli_real_escape_string($connect,$_POST['phone']);
+                    $Tentk = mysqli_real_escape_string($connect,$_POST['name']);
+                    $Matkhau = mysqli_real_escape_string($connect,$_POST['password']);
+                    $Diachi = mysqli_real_escape_string($connect,$_POST['address']);
+                    $Matkhau = md5($Matkhau);
                     
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="address" id="address" placeholder="Địa chỉ của bạn"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-input" name="password" id="password" placeholder="Mật khẩu"/>
-                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu"/>
-                    </div>
+                    $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt'");
                     
-                    <div class="form-group">
-                        <input type="submit" name="submit" id="submit" class="form-submit" value="Đăng kí"/>
-                    </div>
-                </form>
-                <h5 class="loginhere">
-                    Đã có tài khoản ? <a href="../html/DangNhap.html" class="loginhere-link">Đăng nhập</a>
-                </h5>
+                    if($check->num_rows > 0 ){
+                        echo "<p style=\"font-size:40px\">Đăng ký thất bại. Tài khoản này đã tồn tại!</p>";
+                    }
+                    else{
+                        $result=mysqli_query($connect,"INSERT INTO `taikhoan` (`Sdt`, `Tentk`, `Matkhau`,`Diachi`) VALUES ('$Sdt', '$Tentk', '$Matkhau','$Diachi');") ; 
+                        $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt'");
+                        if($check->num_rows > 0 ){
+                            echo "<p style=\"font-size:40px\">Đăng ký thành công. Mời bạn <a href=\"DangNhap.php\"><b style=\"font-size:40px\">đăng nhập!</b></a></p>";
+                        }
+                        else{
+                            echo "<h1>Lỗi hệ thống!</h1>";
+                        }
+                    }
+
+                    
+                }
+            ?>
+
+
             </div>
         </div>
     </section>
@@ -208,3 +214,4 @@
 
 </body>
 </html>
+
