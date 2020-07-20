@@ -1,12 +1,85 @@
 <?php 
     session_start();
 
-    $connect = mysqli_connect("localhost","root","","dbgonz_do_an");
+    
+
+	if(!isset($_SESSION['Sdt'])){
+       
+		header('location:DangNhap.php');
+	}
+
+
+
+    include("DB.php");
     mysqli_query($connect,"SET NAMES 'utf8'");
 
+    $connect = mysqli_connect("localhost","root","","dbgonz_do_an");
+                mysqli_query($connect,"SET NAMES 'utf8'");
     if (isset($_POST['submit'])){
-        if($_POST['password'] == "" && $_POST['new_password'] && $_POST['re_password']){
-            $update = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt' and Matkhau='$Matkhau'");
+        if($_POST['password'] == "" && $_POST['new_password']=="" && $_POST['re_password']==""){
+            $Sdt = mysqli_real_escape_string($connect,$_POST['phone']);
+                    $Tentk = mysqli_real_escape_string($connect,$_POST['name']);
+
+                    $Diachi = mysqli_real_escape_string($connect,$_POST['address']);
+
+            $update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diachi` = '$Diachi' WHERE `taikhoan`.`Sdt` = '$Sdt'");
+
+            $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt'");
+            $row = mysqli_fetch_array($check);
+            $_SESSION["Sdt"]= $row['Sdt'];
+                        $_SESSION["Tentk"]= $row['Tentk'];
+                        $_SESSION["Diachi"]= $row['Diachi'];
+                        $_SESSION["Vaitro"]= $row['Vaitro'];
+                        echo '<script language="javascript">';
+                        echo 'alert("Cập nhật thành công!")';
+                        echo '</script>';
+        }
+        else if (($_POST['password'] != "" || $_POST['new_password'] !="" || $_POST['re_password'] !="") && ($_POST['password'] == "" || $_POST['new_password']=="" || $_POST['re_password']=="")){
+            echo '<script language="javascript">';
+                        echo 'alert("Bạn chưa nhập đầy đủ mật khẩu!")';
+                        echo '</script>';
+        }
+        else if($_POST['new_password'] != $_POST['re_password']){
+            echo '<script language="javascript">';
+                        echo 'alert("Mật khẩu mới không trùng khớp!")';
+                        echo '</script>';
+        }
+        else{
+            $Sdt = mysqli_real_escape_string($connect,$_POST['phone']);
+                    $Tentk = mysqli_real_escape_string($connect,$_POST['name']);
+
+                    $Diachi = mysqli_real_escape_string($connect,$_POST['address']);
+                    $Matkhau = mysqli_real_escape_string($connect,$_POST['password']);
+                    $newMatkhau = mysqli_real_escape_string($connect,$_POST['new_password']);
+                    $Matkhau = md5($Matkhau);
+                    $newMatkhau = md5($newMatkhau);
+
+                    $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt' and Matkhau='$Matkhau'");
+
+                    if($check->num_rows > 0 ){
+$update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diachi` = '$Diachi' , Matkhau = '$newMatkhau' WHERE `taikhoan`.`Sdt` = '$Sdt'");
+
+                        $recheck = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt'");
+            $row = mysqli_fetch_array($recheck);
+            $_SESSION["Sdt"]= $row['Sdt'];
+                        $_SESSION["Tentk"]= $row['Tentk'];
+                        $_SESSION["Diachi"]= $row['Diachi'];
+                        $_SESSION["Vaitro"]= $row['Vaitro'];
+
+                        echo '<script language="javascript">';
+                        echo 'alert("Cập nhật thành công!")';
+                        echo '</script>';
+                    }
+                    else {
+                        echo '<script language="javascript">';
+                        echo 'alert("Mật khẩu hiện tại của bạn không đúng!")';
+                        echo '</script>';
+                    }
+
+
+            
+
+            
         }
     }
 ?>
@@ -14,8 +87,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Thay đổi thông tin - Gonz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
+	<title>Thông tin tài khoản - GONZ</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  
     <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">  
@@ -25,6 +99,20 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="../css/style.css" rel="stylesheet">
+    <style>
+
+        #collapsibleNavbar ul li:hover .sub-menu { display: block; }
+      
+        .sub-menu{
+            display: none;
+            position: absolute;
+            width: 300px;
+            background-color: #fabbbb;
+            padding: 10px;
+        }
+              
+            
+    </style>
 </head>
 <body>
     <header class="header sticky-top " style="background-color: rgba(245, 125, 125, 0.521);">
@@ -44,7 +132,7 @@
                             <div class="header__top__right__social">
                                 <div class="header__cart">
                                     <ul>
-                                        <li><a href="../html/GioHang.html"><i class="fa fa-cart-plus"></i> </a></li>
+                                    <li><a href="GioHang.php"><i class="fa fa-shopping-cart " style="font-size: 32px";></i> </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -95,22 +183,29 @@
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                           <ul class="navbar-nav">
                             <li class="nav-item">
-                              <a class="nav-link" href="../html/TrangChu.html">Trang chủ</a>
+                              <a class="nav-link" href="TrangChu.php">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="../html/GioiThieu.html">Giới thiệu</a>
+                              <a class="nav-link" href="GioiThieu.php">Giới thiệu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../html/CuaHang.html">Cửa hàng</a>
+                                <a class="nav-link" href="CuaHang.php">Cửa hàng</a>
                               </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="../html/ThucDon.html">Thực đơn</a>
+                            <a class="nav-link" >Sản phẩm</a>
+                              <ul class="sub-menu">
+                              <?php
+							  while($dong_sp=mysqli_fetch_assoc($query)){
+							  ?>
+                                                            		<li><a href="<?php echo "sanpham.php?idLoai=".$dong_sp['idLoai']; ?>"><?php echo $dong_sp['Tenloai']; ?></a></li>
+                                                                    <?php
+							  }
+                              ?>         
+                              </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../html/TinTuc.html">Tin tức</a>
-                              </li>
+                            
                               <li class="nav-item">
-                                <a class="nav-link" href="../html/LienHe.html">Liên hệ</a>
+                                <a class="nav-link" href="LienHe.php">Liên hệ</a>
                               </li>
                               
                           </ul>
@@ -120,9 +215,9 @@
                 <div class="col-lg-4" >
                     <div class="hero__search" >
                         <div class="hero__search__form" style="margin-top: 5px;">
-                            <form action="#">
-                                <input type="text" placeholder="Tìm kiếm">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                        <form action="Timkiem.php"  method="POST">
+                                <input type="text" placeholder="Tìm kiếm sản phẩm" name="ndungtim" maxlength="50">
+                                <button type="submit" name="search" class="site-btn">SEARCH</button>
                             </form>
                         </div>
                         </div>
@@ -143,13 +238,7 @@
 		<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img src="../images/banner01.jfif">
-			<div class="carousel-caption">
-				<h1 class="display-2">Sản phẩm mới</h1>
-				<h3>Giá ưu đãi</h3>
-				<button type="button" class="btn btn-outline-light btn-md">
-					Chi tiết sản phẩm
-				</button>
-			</div>
+			
 		</div>
 		<div class="carousel-item">
 			<img src="../images/banner02.png">
@@ -172,26 +261,26 @@
                 <form method="POST" id="signup-form" class="signup-form" action="EditInfo.php">
                     <h2 class="form-title" style="margin-bottom: 20px;">Thông tin tài khoản</h2>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="name" id="name" placeholder="Họ và tên" value="<?php echo $_SESSION["Tentk"]?>"/>
+                        <input type="text" class="form-input" name="name" maxlength="100" id="name" placeholder="Họ và tên" value="<?php echo $_SESSION["Tentk"]?>"/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="phone" id="phone" placeholder="Số điện thoại" value="<?php echo $_SESSION["Sdt"]?>"/>
+                        <input type="text" class="form-input" name="phone" id="phone" maxlength="15" placeholder="Số điện thoại" value="<?php echo $_SESSION["Sdt"]?>" readonly="true"/>
                     </div>
                  
                     <div class="form-group">
-                        <input type="text" class="form-input" name="address" id="address" placeholder="Địa chỉ" value="<?php echo $_SESSION["Diachi"]?>"/>
+                        <input type="text" class="form-input" name="address" maxlength="200" id="address" placeholder="Địa chỉ" value="<?php echo $_SESSION["Diachi"]?>"/>
                     </div>
                     <h3 style="margin-bottom: 10px;">Đổi mật khẩu</h3>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="password" id="password" placeholder="Mật khẩu hiện tại"/>
+                        <input type="text" class="form-input" name="password" id="password" placeholder="Mật khẩu hiện tại" maxlength="200"/>
                         <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="new_password" id="new_password" placeholder="Mật khẩu mới"/>
+                        <input type="text" class="form-input" maxlength="200" name="new_password" id="new_password" placeholder="Mật khẩu mới"/>
                         <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu mới"/>
+                        <input type="password" class="form-input" maxlength="200" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu mới"/>
                     </div>
                     
                     <div class="form-group">

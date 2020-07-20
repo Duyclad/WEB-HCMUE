@@ -1,33 +1,19 @@
 <?php 
     session_start();
+ 
+        
+    include("DB.php");
+    mysqli_query($connect,"SET NAMES 'utf8'");
 
-    $connect = mysqli_connect("localhost","root","","dbgonz_do_an");
-                mysqli_query($connect,"SET NAMES 'utf8'");
+	$sql_loaisp="select * from loaisp";
+	$query=mysqli_query($connect,$sql_loaisp);
 
-                if (isset($_POST['submit'])){
-                    $Sdt = mysqli_real_escape_string($connect,$_POST['username']);
-                    
-                    $Matkhau = mysqli_real_escape_string($connect,$_POST['pass']);
-                    
-                    $Matkhau = md5($Matkhau);
+    $sql_sp = "select * from sanpham  order by id  desc limit 4";
+    $sql_sp = mysqli_query($connect,$sql_sp);
+    
+    
+    $sql_spmuanhieu = mysqli_query($connect,"select * from sanpham order by Luotmua desc limit 8");
 
-                    $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt' and Matkhau='$Matkhau'");
-
-                    if($check->num_rows > 0 ){
-                        $row = mysqli_fetch_array($check);
-                        $_SESSION["Sdt"]= $row['Sdt'];
-                        $_SESSION["Tentk"]= $row['Tentk'];
-                        $_SESSION["Diachi"]= $row['Diachi'];
-                        $_SESSION["Vaitro"]= $row['Vaitro'];
-                    }
-                    else{
-                        echo '<script language="javascript">';
-                        echo 'alert("Sai số điện thoại hoặc mật khẩu!")';
-                        echo '</script>';
-                    }
-            }
-?>
-<?php 
     if (isset($_POST["btnThoat"])){
         unset($_SESSION["Sdt"]);
         unset($_SESSION["Tentk"]);
@@ -38,10 +24,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
+    <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Trang chủ - Gonz</title>
+	<title>Trang chủ - GONZ</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
@@ -56,33 +43,18 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <style>
-        .menu_ngang{
-width:130px; height:50px; background-color:#CCC;
-z-index: 10;
-}
-.menu_ngang ul{
-margin:0; padding:0; list-style:none; float:left;
-}
-.menu_ngang ul li{
-float:left; 
-position:relative;
-}
-.menu_ngang ul li a{
-text-decoration:none; color:#333; padding:0 20px;
-line-height:50px; 
-}
-.menu_ngang ul li ul{
-    position:absolute;
-background-color:#ccc;
-display:none; width:105%;
-}
-.menu_ngang ul li ul li a{
-border-right:none; border-bottom:1px solid #FFF;
-line-height:30px; display:block;
-text-align:left; width:100%;
-}
-.menu_ngang ul li ul li a:hover{ font-weight:bold; }
-.menu_ngang ul li:hover ul{ display:block; }
+
+        #collapsibleNavbar ul li:hover .sub-menu { display: block; }
+      
+        .sub-menu{
+            display: none;
+            position: absolute;
+            width: 300px;
+            background-color: #fabbbb;
+            padding: 10px;
+        }
+              
+            
     </style>
 </head>
 <body>
@@ -103,7 +75,7 @@ text-align:left; width:100%;
                             <div class="header__top__right__social">
                                 <div class="header__cart">
                                     <ul>
-                                        <li><a href="../html/GioHang.html"><i class="fa fa-cart-plus"></i> </a></li>
+                                        <li><a href="GioHang.php"><i class="fa fa-shopping-cart " style="font-size: 32px";></i> </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -157,22 +129,30 @@ text-align:left; width:100%;
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                           <ul class="navbar-nav">
                             <li class="nav-item">
-                              <a class="nav-link active" href="../html/TrangChu.html">Trang chủ</a>
+                              <a class="nav-link active" href="TrangChu.php">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="../html/GioiThieu.html">Giới thiệu</a>
+                              <a class="nav-link" href="GioiThieu.php">Giới thiệu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../html/CuaHang.html">Cửa hàng</a>
+                                <a class="nav-link" href="CuaHang.php">Cửa hàng</a>
                               </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="../html/ThucDon.html">Thực đơn</a>
+                            <li class="nav-item" style="position: relative;">
+                              <a class="nav-link" >Sản phẩm</a>
+                              <ul class="sub-menu">
+                              <?php
+							  while($dong_sp=mysqli_fetch_assoc($query)){
+							  ?>
+                                                            		<li><a href="<?php echo "sanpham.php?idLoai=".$dong_sp['idLoai']; ?>"><?php echo $dong_sp['Tenloai']; ?></a></li>
+                                                                    <?php
+							  }
+							  ?>                           		
+                                                                       
+                              </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../html/TinTuc.html">Tin tức</a>
-                              </li>
+                           
                               <li class="nav-item">
-                                <a class="nav-link" href="../html/LienHe.html">Liên hệ</a>
+                                <a class="nav-link" href="LienHe.php">Liên hệ</a>
                               </li>
                               
                           </ul>
@@ -182,9 +162,9 @@ text-align:left; width:100%;
                 <div class="col-md-4" >
                     <div class="hero__search" >
                         <div class="hero__search__form" style="margin-top: 5px;">
-                            <form action="#">
-                                <input type="text" placeholder="Tìm kiếm">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                        <form action="Timkiem.php"  method="POST">
+                                <input type="text" placeholder="Tìm kiếm sản phẩm" name="ndungtim" maxlength="50">
+                                <button type="submit" name="search" class="site-btn">SEARCH</button>
                             </form>
                         </div>
                         </div>
@@ -205,13 +185,7 @@ text-align:left; width:100%;
 	<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img src="../images/banner01.jfif">
-			<div class="carousel-caption">
-				<h1 class="display-2">Sản phẩm mới</h1>
-				<h3>Giá ưu đãi</h3>
-				<button type="button" class="btn btn-outline-light btn-md">
-					Chi tiết sản phẩm
-				</button>
-			</div>
+			
 		</div>
 		<div class="carousel-item">
 			<img src="../images/banner02.png">
@@ -233,203 +207,129 @@ text-align:left; width:100%;
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title from-blog__title">
-                    <h2>Sản phẩm nổi bật</h2>
+                    <h2>Sản phẩm Mới</h2>
                 </div>
             </div>
         </div>
         <div class="row featured__filter">
+        <?php
+            while ($xuatsp = mysqli_fetch_assoc($sql_sp)) {
+            ?>
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
+                
                     <div class="featured__item__pic set-bg">
-                        <img src="../images/featured/feature-2.jpg"/>
+                        <a href="ChiTietSanPham.php?idsp=<?php echo $xuatsp['id']; ?>">
+                        <img src="../images/Sanpham/<?php echo $xuatsp['Linkanh']; ?>"/>
+                        <div class="featured__item__text">
+                        <h6><a href="ChiTietSanPham.php?idsp=<?php echo $xuatsp['id']; ?>" style="color:#000;font-size:18px;font-weight:bold"><?php echo $xuatsp['Tensp'] ?> </a></h6>
+                        <h5 style="font-size: 18px; color:#000">Giá: <?php echo number_format($xuatsp['Giasp']) ."đ" ?></h5>
+                    </div>
+            </a>
                         <ul class="featured__item__pic__hover" >
-                            <li><a href="#"><i class="fa fa-shopping-cart " style="font-size: 24px;"></i></a></li>
+
+                            <li style="background-color: #fabbbb; padding: 3px;width:80%;font-size: 18px;" id="add<?php echo $xuatsp['id']; ?>"><i class="fa fa-cart-plus" style="font-size: 24px;"></i> Thêm vào giỏ hàng</li>
                         </ul>
                     </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Chuối </a></h6>
-                        <h5>80.000đ</h5>
-                    </div>
+                    
+                    
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg">
-                        <img src="../images/featured/feature-2.jpg"/>
-                        <ul class="featured__item__pic__hover" >
-                            <li><a href="#"><i class="fa fa-shopping-cart " style="font-size: 24px;"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Chuối </a></h6>
-                        <h5>80.000đ</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg">
-                        <img src="../images/featured/feature-2.jpg"/>
-                        <ul class="featured__item__pic__hover" >
-                            <li><a href="#"><i class="fa fa-shopping-cart " style="font-size: 24px;"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Chuối </a></h6>
-                        <h5>80.000đ</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg">
-                        <img src="../images/featured/feature-2.jpg"/>
-                        <ul class="featured__item__pic__hover" >
-                            <li><a href="#"><i class="fa fa-shopping-cart " style="font-size: 24px;"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Chuối </a></h6>
-                        <h5>80.000đ</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg">
-                        <img src="../images/featured/feature-2.jpg"/>
-                        <ul class="featured__item__pic__hover" >
-                            <li><a href="#"><i class="fa fa-shopping-cart " style="font-size: 24px;"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Chuối </a></h6>
-                        <h5>80.000đ</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg">
-                        <img src="../images/featured/feature-2.jpg"/>
-                        <ul class="featured__item__pic__hover" >
-                            <li><a href="#"><i class="fa fa-shopping-cart " style="font-size: 24px;"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Chuối </a></h6>
-                        <h5>80.000đ</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg">
-                        <img src="../images/featured/feature-2.jpg"/>
-                        <ul class="featured__item__pic__hover" >
-                            <li><a href="#"><i class="fa fa-shopping-cart " style="font-size: 24px;"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Chuối </a></h6>
-                        <h5>80.000đ</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg">
-                        <img src="../images/featured/feature-2.jpg"/>
-                        <ul class="featured__item__pic__hover" >
-                            <li><a href="#"><i class="fa fa-shopping-cart " style="font-size: 24px;"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Chuối </a></h6>
-                        <h5>80.000đ</h5>
-                    </div>
+            <script>
+            $(document).ready(function() {
+                
+                    $("#add<?php echo $xuatsp['id']; ?>").click(function() {
+                        <?php 
+                        if (!isset($_SESSION["Sdt"])){
+                            echo "alert(\"Bạn phải đăng nhập!\");";
+                        }
+                            else{
+                            //$("#test").load("ajaxThemGioHang.php");
+                            echo "$.get(\"ajaxThemGioHang.php\",{Sdt:\"". $_SESSION['Sdt']."\",idsp:\"".$xuatsp['id']."\",Sl: 1,Giasp:\"".$xuatsp['Giasp']."\"});";
+                            echo "alert(\"Thêm vào giỏ hàng thành công!\")";
+                            
+                        }
+
+                        
+                        
+                        
+                        ?>
+                             
+                    }
+                )
+            }
+
+            )
+        </script>
+            <?php } ?>
+        
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title from-blog__title">
+                    <h2 style="margin-top:50px;">Sản phẩm Mua Nhiều</h2>
                 </div>
             </div>
         </div>
+        
+        <div class="row featured__filter">
+<?php
+            while ($xuatsp = mysqli_fetch_assoc($sql_spmuanhieu)) {
+            ?>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg">
+                    <a href="ChiTietSanPham.php?idsp=<?php echo $xuatsp['id']; ?>">
+                        <img src="../images/Sanpham/<?php echo $xuatsp['Linkanh']; ?>"/>
+                        <div class="featured__item__text">
+                        <h6 ><a href="ChiTietSanPham.php?idsp=<?php echo $xuatsp['id']; ?>" style="color:#000;font-size:18px;font-weight:bold"><?php echo $xuatsp['Tensp']; ?> </a></h6>
+                        <h5 style="font-size: 18px; color:#000">Giá: <?php echo number_format($xuatsp['Giasp']) ."đ" ?></h5>
+                    </div>
+                    </a>
+
+                        <ul class="featured__item__pic__hover" >
+                            <li style="background-color: #fabbbb; padding: 3px;width:80%;font-size: 18px;" id="add2<?php echo $xuatsp['id']; ?>"><i class="fa fa-cart-plus" style="font-size: 24px;"></i> Thêm vào giỏ hàng</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <script>
+            $(document).ready(function() {
+                
+                    $("#add2<?php echo $xuatsp['id']; ?>").click(function() {
+                        <?php 
+                        if (!isset($_SESSION["Sdt"])){
+                            echo "alert(\"Bạn phải đăng nhập!\");";
+                        }
+                            else{
+                            //$("#test").load("ajaxThemGioHang.php");
+                            echo "$.get(\"ajaxThemGioHang.php\",{Sdt:\"". $_SESSION['Sdt']."\",idsp:\"".$xuatsp['id']."\",Sl: 1,Giasp:\"".$xuatsp['Giasp']."\"});";
+                            echo "alert(\"Thêm vào giỏ hàng thành công!\")";
+                            
+                        }
+
+                        
+                        
+                        
+                        ?>
+                             
+                    }
+                )
+            }
+
+            )
+        </script>
+         <?php } ?>
+        </div>
+           
     </div>
 </section>
 <!-- Featured Section End -->
 
 <!-- Banner Begin -->
-<div class="banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="../images/banner/banner-1.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="../images/banner/banner-2.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<section class="from-blog spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title from-blog__title">
-                    <h2>Blog nổi bật</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic">
-                        <img src="../images/blog/blog-1.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="#">Cách ăn cam không bỏ vỏ</a></h5>
-                        <p>Cách bỏ vỏ khi ăn cam </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic">
-                        <img src="../images/blog/blog-2.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="#">Cách ăn cam không bỏ vỏ</a></h5>
-                        <p>Cách bỏ vỏ khi ăn cam </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic">
-                        <img src="../images/blog/blog-3.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="#">VCách ăn cam không bỏ vỏ</a></h5>
-                        <p>Cách bỏ vỏ khi ăn cam </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <hr>
 <footer>
 	<div class="container-fluid padding">	

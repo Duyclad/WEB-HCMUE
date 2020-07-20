@@ -1,30 +1,38 @@
-<?php
+<?php 
     session_start();
-	if(isset($_SESSION['Sdt'])){
-       
-		header('location:DangKi.php');
-    }
-    
-
+ 
+        
     include("DB.php");
-mysqli_query($connect, "SET NAMES 'utf8'");
+    mysqli_query($connect,"SET NAMES 'utf8'");
 
-$sql_loaisp = "select * from loaisp";
-$query = mysqli_query($connect, $sql_loaisp);
+    $sql_loaisp="select * from loaisp";
+    $query=mysqli_query($connect,$sql_loaisp);
 
+    if (isset($_POST['submit'])){
+        $Ten = mysqli_real_escape_string($connect,$_POST['yourname']);
+        $Email = mysqli_real_escape_string($connect,$_POST['email']);
+        $Tieude= mysqli_real_escape_string($connect,$_POST['title']);
+        $Noidung = mysqli_real_escape_string($connect,$_POST['ndung']);
+        date_default_timezone_set("Asia/Bangkok");
+        $timestamp = time();
+        $date = date("Y-m-d H:i:s", $timestamp);
+        $result=mysqli_query($connect,"INSERT INTO `phanhoi` (`Ten`, `Email`, `Tieude`,`Noidung`,Ngayphanhoi) VALUES ('$Ten', '$Email', '$Tieude','$Noidung','$date');") ;
+
+        echo '<script language="javascript">';
+                        echo 'alert("Nội dung của bạn đã được gửi!")';
+                        echo '</script>';
+    }
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Đăng kí - GONZ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
+	<title>Liên Hệ - GONZ</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
-    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  
-    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">  
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
@@ -64,13 +72,34 @@ $query = mysqli_query($connect, $sql_loaisp);
                             <div class="header__top__right__social">
                                 <div class="header__cart">
                                     <ul>
-                                    <li><a href="GioHang.php"><i class="fa fa-shopping-cart " style="font-size: 32px";></i> </a></li>
+                                        <li><a href="GioHang.php"><i class="fa fa-shopping-cart " style="font-size: 32px";></i> </a></li>
                                     </ul>
                                 </div>
                             </div>
                           
                             <div class="header__top__right__auth">
-                                <a href="DangNhap.php"><i class="fa fa-user"></i> Đăng nhập</a>
+                            <?php 
+                                    if (!isset($_SESSION["Sdt"])){
+                                        echo "<a href=\"DangNhap.php\"><i class=\"fa fa-user\"></i> Đăng nhập</a>";
+
+                                    }
+                                    else{
+                                        echo "
+                                       
+                                        
+                                            <a href=\"EditInfo.php\"> <i class=\"fa fa-user\"></i> ".$_SESSION["Tentk"]."</a>
+                                            
+                                           
+                                                <form method=\"POST\" action=\"TrangChu.php\"><button name=\"btnThoat\"> (Đăng xuất)</button></form>
+                                            
+                                            
+                                        
+                                        
+                                       "
+                                         ;
+                                        
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -114,7 +143,7 @@ $query = mysqli_query($connect, $sql_loaisp);
                               ?>         
                               </ul>
                             </li>
-                     
+                           
                               <li class="nav-item">
                                 <a class="nav-link" href="LienHe.php">Liên hệ</a>
                               </li>
@@ -149,13 +178,7 @@ $query = mysqli_query($connect, $sql_loaisp);
 		<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img src="../images/banner01.jfif">
-			<div class="carousel-caption">
-				<h1 class="display-2">Sản phẩm mới</h1>
-				<h3>Giá ưu đãi</h3>
-				<button type="button" class="btn btn-outline-light btn-md">
-					Chi tiết sản phẩm
-				</button>
-			</div>
+			
 		</div>
 		<div class="carousel-item">
 			<img src="../images/banner02.png">
@@ -168,55 +191,35 @@ $query = mysqli_query($connect, $sql_loaisp);
 		</div>
 	</div>
 </div>
-<hr>
-<div class="main" >
-
-    <section class="signup">
-       
-        <div class="container">
-            <div class="signup-content">
-                
-            <?php
-               
-
-                date_default_timezone_set("Asia/Bangkok");
-    $timestamp = time();
-    $date = date("Y-m-d H:i:s", $timestamp);
-
-                if (isset($_POST['submit'])){
-                    $Sdt = mysqli_real_escape_string($connect,$_POST['phone']);
-                    $Tentk = mysqli_real_escape_string($connect,$_POST['name']);
-                    $Matkhau = mysqli_real_escape_string($connect,$_POST['password']);
-                    $Diachi = mysqli_real_escape_string($connect,$_POST['address']);
-                    $Matkhau = md5($Matkhau);
-                    
-                    $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt'");
-                    
-                    if($check->num_rows > 0 ){
-                        echo "<p style=\"font-size:40px\">Đăng ký thất bại. Tài khoản này đã tồn tại!</p>";
-                    }
-                    else{
-                        $result=mysqli_query($connect,"INSERT INTO `taikhoan` (`Sdt`, `Tentk`, `Matkhau`,`Diachi`,Ngaydangky) VALUES ('$Sdt', '$Tentk', '$Matkhau','$Diachi','$date');") ; 
-                        $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt'");
-                        if($check->num_rows > 0 ){
-                            echo "<p style=\"font-size:40px\">Đăng ký thành công. Mời bạn <a href=\"DangNhap.php\"><b style=\"font-size:40px\">đăng nhập!</b></a></p>";
-                        }
-                        else{
-                            echo "<h1>Lỗi hệ thống!</h1>";
-                        }
-                    }
-
-                    
-                }
-            ?>
-
-
+<div class="contact-form spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="contact__form__title">
+                    <h2>Liên hệ với chúng tôi</h2>
+                </div>
             </div>
         </div>
-    </section>
-
+        <form action="LienHe.php" method="POST">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <input type="text" placeholder="Tên của bạn" name="yourname" maxlength="50">
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <input type="text" placeholder="Email" name="email" maxlength="100">
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <input type="text" placeholder="Tiêu đề" name="title" maxlength="50">
+                </div>
+                <div class="col-lg-12 text-center">
+                    <textarea placeholder="Nội dung" name="ndung" maxlength="2000"></textarea>
+                    <button type="submit" class="site-btn" name="submit">Phản hồi</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div><hr>
-
+  
 <footer>
 	<div class="container-fluid padding">	
 		<div class="row text-center">
@@ -255,4 +258,3 @@ $query = mysqli_query($connect, $sql_loaisp);
 
 </body>
 </html>
-

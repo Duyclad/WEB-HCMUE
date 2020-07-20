@@ -1,54 +1,41 @@
 <?php 
     session_start();
  
-
+        
     include("DB.php");
-                mysqli_query($connect,"SET NAMES 'utf8'");
+    mysqli_query($connect,"SET NAMES 'utf8'");
 
-                $sql_loaisp="select * from loaisp";
-                $query=mysqli_query($connect,$sql_loaisp);
+    
+$sql_loaisp = "select * from loaisp";
+$query = mysqli_query($connect, $sql_loaisp);
 
-                if (isset($_POST['submit'])){
-                    $Sdt = mysqli_real_escape_string($connect,$_POST['username']);
-                    
-                    $Matkhau = mysqli_real_escape_string($connect,$_POST['pass']);
-                    
-                    $Matkhau = md5($Matkhau);
+	$sqlsp="select * from sanpham where id =".$_GET['idsp'];
+    $querysp=mysqli_query($connect,$sqlsp);
+    
+    
 
-                    $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt' and Matkhau='$Matkhau'");
+    $sp=mysqli_fetch_assoc($querysp);
+    $Luotxem= $sp['Luotxem']+1;
+    $idsp = $_GET['idsp'];
+    $updateluotxem  =mysqli_query($connect,"UPDATE `sanpham` SET `Luotxem` = '$Luotxem' WHERE `sanpham`.`id` = $idsp;");
 
-                    if($check->num_rows > 0 ){
-                        $row = mysqli_fetch_array($check);
-                        $_SESSION["Sdt"]= $row['Sdt'];
-                        $_SESSION["Tentk"]= $row['Tentk'];
-                        $_SESSION["Diachi"]= $row['Diachi'];
-                        $_SESSION["Vaitro"]= $row['Vaitro'];
-                        if ($row['Quenpass']=="YES"){
-                            $up = mysqli_query($connect,"UPDATE `taikhoan` SET `Quenpass` = NULL WHERE `taikhoan`.`Sdt` = '$Sdt'");
-                        }
-                    }
-                    else{
-                        echo '<script language="javascript">';
-                        echo 'alert("Sai số điện thoại hoặc mật khẩu!")';
-                        echo '</script>';
-                    }
-            }
+    
 
-	if(isset($_SESSION['Sdt'])){
-       
-		header('location:TrangChu.php');
-	}
+    if (isset($_POST["btnThoat"])){
+        unset($_SESSION["Sdt"]);
+        unset($_SESSION["Tentk"]);
+        unset($_SESSION["Diachi"]);
+        unset($_SESSION["Vaitro"]);
+    }
 ?>
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
-	<title>Đăng nhập - GONZ</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Chi tiết sản phẩm - GONZ</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
@@ -57,27 +44,79 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <style>
 
-#collapsibleNavbar ul li:hover .sub-menu { display: block; }
-
-.sub-menu{
-    display: none;
-    position: absolute;
-    width: 300px;
-    background-color: #fabbbb;
-    padding: 10px;
-}
+        #collapsibleNavbar ul li:hover .sub-menu { display: block; }
       
-    
-</style>
+        .sub-menu{
+            display: none;
+            position: absolute;
+            width: 300px;
+            background-color: #fabbbb;
+            padding: 10px;
+        }
+       
+.buttons_added {
+    opacity:1;
+    display:inline-block;
+    display:-ms-inline-flexbox;
+    display:inline-flex;
+    white-space:nowrap;
+    vertical-align:top;
+}
+.is-form {
+    overflow:hidden;
+    position:relative;
+    background-color:#f9f9f9;
+    height:2.2rem;
+    width:1.9rem;
+    padding:0;
+    text-shadow:1px 1px 1px #fff;
+    border:1px solid #ddd;
+}
+.is-form:focus,.input-text:focus {
+    outline:none;
+}
+.is-form.minus {
+    border-radius:4px 0 0 4px;
+}
+.is-form.plus {
+    border-radius:0 4px 4px 0;
+}
+.input-qty {
+    background-color:#fff;
+    height:2.2rem;
+    text-align:center;
+    font-size:1rem;
+    display:inline-block;
+    vertical-align:top;
+    margin:0;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    border-left:0;
+    border-right:0;
+    padding:0;
+}
+.input-qty::-webkit-outer-spin-button,.input-qty::-webkit-inner-spin-button {
+    -webkit-appearance:none;
+    margin:0;
+}
+
+              
+            
+    </style>
 </head>
-<body> 
+<body>
     <header class="header sticky-top " style="background-color: rgba(245, 125, 125, 0.521);">
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-md-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
                                 <li><i class="fa fa-envelope"></i> duy3271@gmail.com</li>
@@ -85,18 +124,18 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-md-6 col-md-6">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
                                 <div class="header__cart">
                                     <ul>
-                                        <li><a href="GioHang.php"><i class="fa fa-shopping-cart " style="font-size: 32px";></i> </a></li>
+                                    <li><a href="GioHang.php"><i class="fa fa-shopping-cart " style="font-size: 32px";></i> </a></li>
                                     </ul>
                                 </div>
                             </div>
                           
-                            <div class="header__top__right__auth">
-                            <?php 
+                            <div class="header__top__right__auth" >
+                                <?php 
                                     if (!isset($_SESSION["Sdt"])){
                                         echo "<a href=\"DangNhap.php\"><i class=\"fa fa-user\"></i> Đăng nhập</a>";
 
@@ -118,20 +157,23 @@
                                         
                                     }
                                 ?>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <div class="container ">
             <div class="row ">
-                <div class="col-lg-1">
+                <div class="col-md-1">
                     <div class="header__logo">
-                       <a href="../html/TrangChu.html"><img src="../images/Gonz.png" alt=""></a>
+                        <a href="../html/TrangChu.html"><img src="../images/Gonz.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-7">
+                
+                <div class="col-md-7">
                     <nav class="navbar navbar-expand-md bg-dark navbar-light bg-transparent">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                           <span class="navbar-toggler-icon"></span>
@@ -141,7 +183,7 @@
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                           <ul class="navbar-nav">
                             <li class="nav-item">
-                              <a class="nav-link" href="TrangChu.php">Trang chủ</a>
+                              <a class="nav-link active" href="TrangChu.php">Trang chủ</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" href="GioiThieu.php">Giới thiệu</a>
@@ -149,7 +191,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="CuaHang.php">Cửa hàng</a>
                               </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="position: relative;">
                             <a class="nav-link" >Sản phẩm</a>
                               <ul class="sub-menu">
                               <?php
@@ -161,7 +203,7 @@
                               ?>         
                               </ul>
                             </li>
-                         
+                            
                               <li class="nav-item">
                                 <a class="nav-link" href="LienHe.php">Liên hệ</a>
                               </li>
@@ -170,7 +212,7 @@
                         </div>
                       </nav>
                 </div>
-                <div class="col-lg-4" >
+                <div class="col-md-4" >
                     <div class="hero__search" >
                         <div class="hero__search__form" style="margin-top: 5px;">
                         <form action="Timkiem.php"  method="POST">
@@ -193,7 +235,7 @@
 		<li data-target="#slides" data-slide-to="2"></li>		
 		<li data-target="#slides" data-slide-to="3"></li>
 	</ul>
-		<div class="carousel-inner">
+	<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img src="../images/banner01.jfif">
 			
@@ -209,56 +251,68 @@
 		</div>
 	</div>
 </div>
-<hr>	
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100 p-t-50 p-b-90">
-            <form class="login100-form validate-form flex-sb flex-w" method="POST" action="DangNhap.php">
-                <span class="login100-form-title p-b-51">
-                    Đăng nhập Gonz
-                </span>
 
+<hr>
+<div class="row">
+    <div class="col-md-6" style="text-align: center;">
+    <img  style="width:500px" src="../images/Sanpham/<?php echo $sp['Linkanh']; ?>">
+    </div>
+    <div class="col-md-6">
+        
+            <h4 class="card-title" style="color:#000; margin-top:40px;font-size:32px"><b><?php echo $sp['Tensp']; ?></b></h4>
+            <p style="font-size: 26px; color:#000">Giá: <?php echo number_format($sp['Giasp']) . "đ"; ?></p>
+          
                 
-                <div class="wrap-input100 validate-input m-b-16" data-validate = "Chưa nhập tài khoản">
-                    <input class="input100" type="text" name="username" placeholder="Số điện thoại" maxlength="15">
-                    <span class="focus-input100"></span>
-                </div>
-                
-                
-                <div class="wrap-input100 validate-input m-b-16" data-validate = "Vui lòng nhập mật khẩu">
-                    <input class="input100" type="password" name="pass" placeholder="Mật khẩu" maxlength="200">
-                    <span class="focus-input100"></span>
-                </div>
-                
-                <div class="flex-sb-m w-full p-t-3 p-b-24">
-                    <div class="contact100-form-checkbox">
+    <div class="buttons_added">
+        <p style="font-size: 26px; color:#000">Số lượng: &nbsp;&nbsp;</p>
+  <input class="minus is-form" type="button" value="-">
+  <input aria-label="quantity" class="input-qty" max ="100" min="1" name="" type="number" value="1"  id="SLSP">
+  <input class="plus is-form" type="button" value="+">
+            
+            
+</div>
 
-                    </div>
-
-                    <div>
-                        <a href="QuenMatKhau.php" class="txt1">
-                            Quên mật khẩu ?
-                        </a>
-                    </div>
-                </div>
-
-                <div class="container-login100-form-btn m-t-17">
-                    <button class="login100-form-btn" name="submit">
-                        Đăng nhập
-                    </button>
-                    <h5 class="loginhere">
-                        Chưa có tài khoản ?  <a href="DangKi.php" class="loginhere-link">Đăng kí</a>
-                    </h5>
-               
-            </form>
-        </div>
+    <li><button style="background-color: #fabbbb; padding: 10px" id="add"><a  style="font-size: 24px;"><i class="fa fa-cart-plus " style="font-size: 24px;"></i> Thêm vào giỏ hàng</a></button></li>
+       
+    
+    
+    
     </div>
 </div>
+
+<script>
+            $(document).ready(function() {
+                    
+                    $("#add").click(function() {
+                      
+                      
+                        <?php 
+                        if (!isset($_SESSION["Sdt"])){
+                            echo "alert(\"Bạn phải đăng nhập!\");";
+                        }
+                        else{
+                            ?>
+                            var url = "ajaxThemGioHang.php?Sl=" + $("#SLSP").val();
+                            
+                            //$("#test").load("ajaxThemGioHang.php");
+                           $.get(url,{Sdt: "<?php echo $_SESSION['Sdt']; ?> ",idsp:" <?php echo $idsp ;?>",Giasp:"<?php echo $sp['Giasp'] ;?>"});
+                            <?php 
+                            echo "alert(\"Thêm vào giỏ hàng thành công!\")";
+                           
+                        }
+                        ?>
+                   }          
+                    
+                )
+            }
+
+            )
+        </script>
+
 <hr>
-  
 <footer>
 	<div class="container-fluid padding">	
-		<div class="row text-center">
+		<div class="row text-center ">
 			<div class="col-md-4">
 				<img src="../images/Gonz.png" width=" 50" height="50">
 				
@@ -287,10 +341,36 @@
 		</div>
 	</div>
 </footer>
+<script>//<![CDATA[
+$('input.input-qty').each(function() {
+  var $this = $(this),
+    qty = $this.parent().find('.is-form'),
+    min = Number($this.attr('min')),
+    max = Number($this.attr('max'))
+  if (min == 0) {
+    var d = 0
+  } else d = min
+  $(qty).on('click', function() {
+    if ($(this).hasClass('minus')) {
+      if (d > min) d += -1
+    } else if ($(this).hasClass('plus')) {
+      var x = Number($this.val()) + 1
+      if (x <= max) d += 1
+    }
+    $this.attr('value', d).val(d)
+  })
+})
 
+
+$('#SLSP').change(function(){
+    if ($('#SLSP').val() <1){
+        $('#SLSP').val(1);
+    }
+    else if ($('#SLSP').val()>100){
+        $('#SLSP').val(100);
+    }
+});
+//]]></script>
 </body>
 </html>	
 
-
-</body>
-</html>

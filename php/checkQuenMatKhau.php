@@ -1,3 +1,11 @@
+
+<?php
+    session_start();
+	if(isset($_SESSION['Sdt'])){
+       
+		header('location:TrangChu.php');
+	}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -139,7 +147,7 @@
             <div class="signup-content">
                 
             <?php
-                $connect = mysqli_connect("localhost","root","","dbgonz_do_an");
+                include("DB.php");
                 mysqli_query($connect,"SET NAMES 'utf8'");
 
                 if (isset($_POST['submit'])){
@@ -150,6 +158,7 @@
                     
                     if($check->num_rows > 0 ){
                         echo "<p style=\"font-size:40px\">Thành công! Chúng tôi sẽ gửi mật khẩu mới cho bạn trong thời gian sớm nhất.</p>";
+                        $capnhat=mysqli_query($connect,"UPDATE `taikhoan` SET `Quenpass` = 'YES' WHERE `taikhoan`.`Sdt` = '$Sdt'");
                     }
                     else{
                         

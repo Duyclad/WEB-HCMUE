@@ -1,9 +1,24 @@
+<?php
+session_start();
+
+if (isset($_SESSION['Sdt'])) {
+
+    header('location:TrangChu.php');
+}
+
+include("DB.php");
+mysqli_query($connect, "SET NAMES 'utf8'");
+
+$sql_loaisp = "select * from loaisp";
+$query = mysqli_query($connect, $sql_loaisp);
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Quên mật khẩu - Gonz</title>
+    <title>Quên mật khẩu - GONZ</title>
+    <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
@@ -12,7 +27,20 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="../css/style.css" rel="stylesheet">
-  
+    <style>
+
+#collapsibleNavbar ul li:hover .sub-menu { display: block; }
+
+.sub-menu{
+    display: none;
+    position: absolute;
+    width: 300px;
+    background-color: #fabbbb;
+    padding: 10px;
+}
+      
+    
+</style>
 </head>
 <body> 
     <header class="header sticky-top " style="background-color: rgba(245, 125, 125, 0.521);">
@@ -32,7 +60,7 @@
                             <div class="header__top__right__social">
                                 <div class="header__cart">
                                     <ul>
-                                        <li><a href="../html/GioHang.html"><i class="fa fa-cart-plus"></i> </a></li>
+                                    <li><a href="GioHang.php"><i class="fa fa-shopping-cart " style="font-size: 32px";></i> </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -62,22 +90,29 @@
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                           <ul class="navbar-nav">
                             <li class="nav-item">
-                              <a class="nav-link" href="../html/TrangChu.html">Trang chủ</a>
+                              <a class="nav-link" href="TrangChu.php">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="../html/GioiThieu.html">Giới thiệu</a>
+                              <a class="nav-link" href="GioiThieu.php">Giới thiệu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../html/CuaHang.html">Cửa hàng</a>
+                                <a class="nav-link" href="CuaHang.php">Cửa hàng</a>
                               </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="../html/ThucDon.html">Thực đơn</a>
+                            <a class="nav-link" >Sản phẩm</a>
+                              <ul class="sub-menu">
+                              <?php
+							  while($dong_sp=mysqli_fetch_assoc($query)){
+							  ?>
+                                                            		<li><a href="<?php echo "sanpham.php?idLoai=".$dong_sp['idLoai']; ?>"><?php echo $dong_sp['Tenloai']; ?></a></li>
+                                                                    <?php
+							  }
+                              ?>         
+                              </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../html/TinTuc.html">Tin tức</a>
-                              </li>
+                          
                               <li class="nav-item">
-                                <a class="nav-link" href="../html/LienHe.html">Liên hệ</a>
+                                <a class="nav-link" href="LienHe.php">Liên hệ</a>
                               </li>
                               
                           </ul>
@@ -87,9 +122,9 @@
                 <div class="col-lg-4" >
                     <div class="hero__search" >
                         <div class="hero__search__form" style="margin-top: 5px;">
-                            <form action="#">
-                                <input type="text" placeholder="Tìm kiếm">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                        <form action="Timkiem.php"  method="POST">
+                                <input type="text" placeholder="Tìm kiếm sản phẩm" name="ndungtim" maxlength="50">
+                                <button type="submit" name="search" class="site-btn">SEARCH</button>
                             </form>
                         </div>
                         </div>
@@ -110,13 +145,7 @@
 		<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img src="../images/banner01.jfif">
-			<div class="carousel-caption">
-				<h1 class="display-2">Sản phẩm mới</h1>
-				<h3>Giá ưu đãi</h3>
-				<button type="button" class="btn btn-outline-light btn-md">
-					Chi tiết sản phẩm
-				</button>
-			</div>
+			
 		</div>
 		<div class="carousel-item">
 			<img src="../images/banner02.png">
@@ -135,7 +164,7 @@
 		<h1 style="color: rgb(255, 37, 164);">Quên mật khẩu</h1>
 		<p style="font-size: 24px;">Nhập Số điện thoại và chúng tôi sẽ gửi mật khẩu mới vào Số điện thoại của bạn trong thời gian sớm nhất!</p>
 		<form method="POST" action="checkQuenMatKhau.php">
-			<input type="text" name="phone" placeholder="Số điện thoại của bạn">
+			<input type="text" name="phone" placeholder="Số điện thoại của bạn" maxlength="15">
             <input type="submit" name="submit" value="Khôi phục tài khoản">
             <h4 style="margin-top: 20px;" >
                 Trở lại <a href="DangNhap.php" class="loginhere-link">Đăng nhập</a>

@@ -1,30 +1,24 @@
 <?php
-    session_start();
-	if(isset($_SESSION['Sdt'])){
-       
-		header('location:DangKi.php');
-    }
+     session_start();
+ 
+        
+     include("DB.php");
+     mysqli_query($connect,"SET NAMES 'utf8'");
     
-
-    include("DB.php");
-mysqli_query($connect, "SET NAMES 'utf8'");
-
-$sql_loaisp = "select * from loaisp";
-$query = mysqli_query($connect, $sql_loaisp);
-
+     $sql_loaisp="select * from loaisp";
+    $query=mysqli_query($connect,$sql_loaisp);
+    
+    $sql_ch = mysqli_query($connect,"select * from cuahang ");
 ?>
-
 <!DOCTYPE html>
 <html>
-
 <head>
-	<meta charset="utf-8">
+  <meta charset="utf-8">
+  <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Đăng kí - GONZ</title>
-    <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
+	<title>Cửa hàng - GONZ</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
-    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  
-    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">  
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
@@ -70,7 +64,28 @@ $query = mysqli_query($connect, $sql_loaisp);
                             </div>
                           
                             <div class="header__top__right__auth">
-                                <a href="DangNhap.php"><i class="fa fa-user"></i> Đăng nhập</a>
+                            <?php 
+                                    if (!isset($_SESSION["Sdt"])){
+                                        echo "<a href=\"DangNhap.php\"><i class=\"fa fa-user\"></i> Đăng nhập</a>";
+
+                                    }
+                                    else{
+                                        echo "
+                                       
+                                        
+                                            <a href=\"EditInfo.php\"> <i class=\"fa fa-user\"></i> ".$_SESSION["Tentk"]."</a>
+                                            
+                                           
+                                                <form method=\"POST\" action=\"TrangChu.php\"><button name=\"btnThoat\"> (Đăng xuất)</button></form>
+                                            
+                                            
+                                        
+                                        
+                                       "
+                                         ;
+                                        
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -114,7 +129,7 @@ $query = mysqli_query($connect, $sql_loaisp);
                               ?>         
                               </ul>
                             </li>
-                     
+                            
                               <li class="nav-item">
                                 <a class="nav-link" href="LienHe.php">Liên hệ</a>
                               </li>
@@ -149,13 +164,7 @@ $query = mysqli_query($connect, $sql_loaisp);
 		<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img src="../images/banner01.jfif">
-			<div class="carousel-caption">
-				<h1 class="display-2">Sản phẩm mới</h1>
-				<h3>Giá ưu đãi</h3>
-				<button type="button" class="btn btn-outline-light btn-md">
-					Chi tiết sản phẩm
-				</button>
-			</div>
+			
 		</div>
 		<div class="carousel-item">
 			<img src="../images/banner02.png">
@@ -169,54 +178,23 @@ $query = mysqli_query($connect, $sql_loaisp);
 	</div>
 </div>
 <hr>
-<div class="main" >
+<h1 style="margin-top: 5px; margin-bottom: 5px; text-align: center;">Chi nhánh Trà Sữa Gonz</h1>
 
-    <section class="signup">
-       
-        <div class="container">
-            <div class="signup-content">
-                
-            <?php
-               
-
-                date_default_timezone_set("Asia/Bangkok");
-    $timestamp = time();
-    $date = date("Y-m-d H:i:s", $timestamp);
-
-                if (isset($_POST['submit'])){
-                    $Sdt = mysqli_real_escape_string($connect,$_POST['phone']);
-                    $Tentk = mysqli_real_escape_string($connect,$_POST['name']);
-                    $Matkhau = mysqli_real_escape_string($connect,$_POST['password']);
-                    $Diachi = mysqli_real_escape_string($connect,$_POST['address']);
-                    $Matkhau = md5($Matkhau);
-                    
-                    $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt'");
-                    
-                    if($check->num_rows > 0 ){
-                        echo "<p style=\"font-size:40px\">Đăng ký thất bại. Tài khoản này đã tồn tại!</p>";
-                    }
-                    else{
-                        $result=mysqli_query($connect,"INSERT INTO `taikhoan` (`Sdt`, `Tentk`, `Matkhau`,`Diachi`,Ngaydangky) VALUES ('$Sdt', '$Tentk', '$Matkhau','$Diachi','$date');") ; 
-                        $check = mysqli_query($connect,"SELECT * FROM `taikhoan` where Sdt='$Sdt'");
-                        if($check->num_rows > 0 ){
-                            echo "<p style=\"font-size:40px\">Đăng ký thành công. Mời bạn <a href=\"DangNhap.php\"><b style=\"font-size:40px\">đăng nhập!</b></a></p>";
-                        }
-                        else{
-                            echo "<h1>Lỗi hệ thống!</h1>";
-                        }
-                    }
-
-                    
-                }
+<?php
+            while ($xuatsp = mysqli_fetch_assoc($sql_ch)) {
             ?>
-
-
-            </div>
-        </div>
-    </section>
-
-</div><hr>
-
+<div class="dropdown" style="padding: 15px;">
+    <h3 >- <?php echo $xuatsp['Tendc'] ?></h3 ><br>
+    <p style="font-size: 24px;">Địa chỉ:     <?php echo $xuatsp['Diachi'] ?></p>
+    
+  </div>
+  <div style="padding: 15px;">
+  <?php echo $xuatsp['Codehtml'] ?>
+  </div>
+  <hr>
+  
+  <?php } ?>
+  
 <footer>
 	<div class="container-fluid padding">	
 		<div class="row text-center">
@@ -255,4 +233,3 @@ $query = mysqli_query($connect, $sql_loaisp);
 
 </body>
 </html>
-
