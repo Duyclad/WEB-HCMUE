@@ -2,7 +2,7 @@
     session_start();
 	if(isset($_SESSION['Sdt'])){
        
-		header('location:DangKi.php');
+		header('location:TrangChu.php');
     }
     
 
@@ -47,6 +47,32 @@ $query = mysqli_query($connect, $sql_loaisp);
     </style>
 </head>
 <body>
+      <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v7.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution=setup_tool
+        page_id="108189827644660"
+  theme_color="#ff5ca1"
+  logged_in_greeting="Chào bạn! Bạn cần GONZ giúp gì không?"
+  logged_out_greeting="Chào bạn! Bạn cần GONZ giúp gì không?">
+      </div>
     <header class="header sticky-top " style="background-color: rgba(245, 125, 125, 0.521);">
         <div class="header__top">
             <div class="container">
@@ -81,7 +107,7 @@ $query = mysqli_query($connect, $sql_loaisp);
             <div class="row ">
                 <div class="col-lg-1">
                     <div class="header__logo">
-                       <a href="../html/TrangChu.html"><img src="../images/Gonz.png" alt=""></a>
+                       <a href="TrangChu.php"><img src="../images/Gonz.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -149,13 +175,7 @@ $query = mysqli_query($connect, $sql_loaisp);
 		<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img src="../images/banner01.jfif">
-			<div class="carousel-caption">
-				<h1 class="display-2">Sản phẩm mới</h1>
-				<h3>Giá ưu đãi</h3>
-				<button type="button" class="btn btn-outline-light btn-md">
-					Chi tiết sản phẩm
-				</button>
-			</div>
+			
 		</div>
 		<div class="carousel-item">
 			<img src="../images/banner02.png">
@@ -219,25 +239,27 @@ $query = mysqli_query($connect, $sql_loaisp);
 
 <footer>
 	<div class="container-fluid padding">	
-		<div class="row text-center">
-			<div class="col-md-4">
+		<div class="row text-center ">
+			<div class="col-md-4" >
 				<img src="../images/Gonz.png" width=" 50" height="50">
 				
 				<p>0977-4090-00</p>
-				<p>mymail@gmail.com</p>
+                <p>mymail@gmail.com</p>
+                <p><a href="https://www.facebook.com/GONZ-108189827644660" target="_blank"><i class="fa fa-facebook-square" style="font-size: 19px;color:white"> Facebook </i></a></p>
 				<p>280 ADV, phường 4, quận 5, Thành phố Hồ Chí Minh</p>
 			</div>
 			<div class="col-md-4">				
-				<hr class="light">
+				<hr class="light"  style="width:100%">
 				<h3>Giờ làm việc</h3>
-				<hr class="light">
+				<hr class="light"  style="width:100%">
 				<p>Thứ 2 - Thứ 7: 7h-22h</p>
 				<p>Cuối tuần: 7h-19h</p>
 			</div>
-			<div class="col-md-4">				
-				<hr class="light">
+            <div class="col-md-4" >
+           			
+				<hr class="light" style="width:100%" >
 				<h3>Dịch vụ</h3>
-				<hr class="light">
+				<hr class="light"  style="width:100%">
 				<p>Trà sữa</p>
 				<p>Thức uống theo yêu cầu</p>
 			</div>
@@ -252,7 +274,4 @@ $query = mysqli_query($connect, $sql_loaisp);
 </body>
 </html>	
 
-
-</body>
-</html>
 

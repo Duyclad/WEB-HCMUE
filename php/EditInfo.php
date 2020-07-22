@@ -13,8 +13,8 @@
     include("DB.php");
     mysqli_query($connect,"SET NAMES 'utf8'");
 
-    $connect = mysqli_connect("localhost","root","","dbgonz_do_an");
-                mysqli_query($connect,"SET NAMES 'utf8'");
+    $sql_loaisp="select * from loaisp";
+    $query=mysqli_query($connect,$sql_loaisp);
     if (isset($_POST['submit'])){
         if($_POST['password'] == "" && $_POST['new_password']=="" && $_POST['re_password']==""){
             $Sdt = mysqli_real_escape_string($connect,$_POST['phone']);
@@ -82,6 +82,14 @@ $update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diac
             
         }
     }
+    if (isset($_SESSION["Vaitro"])){
+        if ($_SESSION['Vaitro']=="1"){
+            header('location:./staff/staff.php');
+        }
+        else if ($_SESSION['Vaitro']=="2"){
+            header('location:./admin/admin.php');
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -115,6 +123,32 @@ $update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diac
     </style>
 </head>
 <body>
+      <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v7.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution=setup_tool
+        page_id="108189827644660"
+  theme_color="#ff5ca1"
+  logged_in_greeting="Chào bạn! Bạn cần GONZ giúp gì không?"
+  logged_out_greeting="Chào bạn! Bạn cần GONZ giúp gì không?">
+      </div>
     <header class="header sticky-top " style="background-color: rgba(245, 125, 125, 0.521);">
         <div class="header__top">
             <div class="container">
@@ -170,7 +204,7 @@ $update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diac
             <div class="row ">
                 <div class="col-lg-1">
                     <div class="header__logo">
-                       <a href="../html/TrangChu.html"><img src="../images/Gonz.png" alt=""></a>
+                       <a href="TrangChu.php"><img src="../images/Gonz.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -258,6 +292,10 @@ $update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diac
        
         <div class="container">
             <div class="signup-content">
+                              <div style="text-align:right">
+                                   <a href="LSDonHang.php"><button style="border:1px solid; background-color:#f727c3;color:white;padding:5px;border-radius:10px ">Lịch sử mua hàng</button></a>
+                              </div>
+               
                 <form method="POST" id="signup-form" class="signup-form" action="EditInfo.php">
                     <h2 class="form-title" style="margin-bottom: 20px;">Thông tin tài khoản</h2>
                     <div class="form-group">
@@ -296,25 +334,27 @@ $update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diac
   
 <footer>
 	<div class="container-fluid padding">	
-		<div class="row text-center">
-			<div class="col-md-4">
+		<div class="row text-center ">
+			<div class="col-md-4" >
 				<img src="../images/Gonz.png" width=" 50" height="50">
 				
 				<p>0977-4090-00</p>
-				<p>mymail@gmail.com</p>
+                <p>mymail@gmail.com</p>
+                <p><a href="https://www.facebook.com/GONZ-108189827644660" target="_blank"><i class="fa fa-facebook-square" style="font-size: 19px;color:white"> Facebook </i></a></p>
 				<p>280 ADV, phường 4, quận 5, Thành phố Hồ Chí Minh</p>
 			</div>
 			<div class="col-md-4">				
-				<hr class="light">
+				<hr class="light"  style="width:100%">
 				<h3>Giờ làm việc</h3>
-				<hr class="light">
+				<hr class="light"  style="width:100%">
 				<p>Thứ 2 - Thứ 7: 7h-22h</p>
 				<p>Cuối tuần: 7h-19h</p>
 			</div>
-			<div class="col-md-4">				
-				<hr class="light">
+            <div class="col-md-4" >
+           			
+				<hr class="light" style="width:100%" >
 				<h3>Dịch vụ</h3>
-				<hr class="light">
+				<hr class="light"  style="width:100%">
 				<p>Trà sữa</p>
 				<p>Thức uống theo yêu cầu</p>
 			</div>
@@ -325,10 +365,7 @@ $update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diac
 		</div>
 	</div>
 </footer>
-
 </body>
 </html>	
 
 
-</body>
-</html>
