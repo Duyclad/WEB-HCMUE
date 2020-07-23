@@ -66,17 +66,20 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
-	<title>Thông tin tài khoản - GONZ</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
-    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  
-    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">  
+	<title>Lịch sử đơn hàng - GONZ</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <style>
 
         #collapsibleNavbar ul li:hover .sub-menu { display: block; }
@@ -126,7 +129,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> duy3271@gmail.com</li>
+                                <li><i class="fa fa-envelope"></i> Gonz@gmail.com</li>
                                 <li>FREE ship toàn khu vực Quận 5</li>
                             </ul>
                         </div>
@@ -256,7 +259,12 @@
 	</div>
 </div>
 <hr>
-<p>LỊCH SỬ MUA HÀNG</p>
+<h3 style="text-align: center;">LỊCH SỬ MUA HÀNG</h3>
+<?php 
+    if ($totalsp=="0"){
+        echo "<h3 style=\"text-align:left;padding-left:50px\">Bạn chưa có đơn hàng nào!</h3>";
+    }
+?>
 <?php
 
 							  while($dong_sp=mysqli_fetch_assoc($donhang)){
@@ -318,8 +326,8 @@
             <?php
         }
     ?>
-    <p style="font-size:22px">Mã đơn hàng: <?php echo $idDM ?></p>
-    <p style="font-size:22px">Đặt hàng lúc: <?php echo $dong_sp['Tgdathang'] ?> - Giao hàng lúc: <?php if ($dong_sp['Tgiangiao']==NULL) {echo " ";} else{ echo $dong_sp['Tgiangiao'];} ?> - Trạng thái đơn hàng:  <?php if ($dong_sp['Trangthai']=="Đang chuẩn bị"){ echo "<b style={\"color:yellow\"}>".$dong_sp['Trangthai']."</b>";} else if ($dong_sp['Trangthai']=="Đang giao"){ echo "<b style={\"color:blue\"}>".$dong_sp['Trangthai']."</b>";} else if ($dong_sp['Trangthai']=="Đã giao"){ echo "<b style={\"color:green\"}>".$dong_sp['Trangthai']."</b>";} else { echo "<b style={\"color:red\"}>".$dong_sp['Trangthai']."</b>";} ?></p>
+    <p style="font-size:22px"><b>Mã đơn hàng:</b> <?php echo $idDM ?></p>
+    <p style="font-size:22px"><b>Đặt hàng lúc:</b> <?php echo $dong_sp['Tgdathang'] ?> - Giao hàng lúc: <?php if ($dong_sp['Tgiangiao']==NULL) {echo " ";} else{ echo $dong_sp['Tgiangiao'];} ?> - Trạng thái đơn hàng:  <?php if ($dong_sp['Trangthai']=="Đang chuẩn bị"){ echo "<b style={\"color:yellow\"}>".$dong_sp['Trangthai']."</b>";} else if ($dong_sp['Trangthai']=="Đang giao"){ echo "<b style={\"color:blue\"}>".$dong_sp['Trangthai']."</b>";} else if ($dong_sp['Trangthai']=="Đã giao"){ echo "<b style={\"color:green\"}>".$dong_sp['Trangthai']."</b>";} else { echo "<b style={\"color:red\"}>".$dong_sp['Trangthai']."</b>";} ?></p>
     <p style="font-size:22px"><b>Tên người nhận:</b> <?php echo $dong_sp['Tenngnhan'] ?></p>
     <p style="font-size:22px"><b>Số điện thoại người nhận:</b> <?php echo $dong_sp['Sdtngnhan'] ?></p>
     <p style="font-size:22px"><b>Nơi nhận hàng:</b> <?php echo $dong_sp['Diachingnhan'] ?></p>
@@ -438,16 +446,18 @@
 	<div class="container-fluid padding">	
 		<div class="row text-center ">
 			<div class="col-md-4" >
-				<img src="../images/Gonz.png" width=" 50" height="50">
+            <hr class="light"  style="width:100%">
+            <h3 style=" color : #CCFFCC">Liên hệ</h3>
+            <hr class="light"  style="width:100%">
 				
-				<p>0977-4090-00</p>
-                <p>mymail@gmail.com</p>
-                <p><a href="https://www.facebook.com/GONZ-108189827644660" target="_blank"><i class="fa fa-facebook-square" style="font-size: 19px;color:white"> Facebook </i></a></p>
+				<p>SĐT: 0977-4090-60</p>
+                <p>Email: Gonz@gmail.com</p>
+                <p><a href="https://www.facebook.com/GONZ-108189827644660" target="_blank"><i class="fa fa-facebook-square" style="font-size: 19px;color:white"> Fanpgage Gonz </i></a></p>
 				<p>280 ADV, phường 4, quận 5, Thành phố Hồ Chí Minh</p>
 			</div>
 			<div class="col-md-4">				
 				<hr class="light"  style="width:100%">
-				<h3>Giờ làm việc</h3>
+				<h3 style=" color : #CCFFCC">Giờ làm việc</h3>
 				<hr class="light"  style="width:100%">
 				<p>Thứ 2 - Thứ 7: 7h-22h</p>
 				<p>Cuối tuần: 7h-19h</p>
@@ -455,7 +465,7 @@
             <div class="col-md-4" >
            			
 				<hr class="light" style="width:100%" >
-				<h3>Dịch vụ</h3>
+				<h3 style=" color : #CCFFCC">Dịch vụ</h3>
 				<hr class="light"  style="width:100%">
 				<p>Trà sữa</p>
 				<p>Thức uống theo yêu cầu</p>

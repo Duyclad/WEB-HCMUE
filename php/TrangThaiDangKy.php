@@ -22,16 +22,19 @@ $query = mysqli_query($connect, $sql_loaisp);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Đăng kí - GONZ</title>
     <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
-    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  
-    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">  
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <style>
 
         #collapsibleNavbar ul li:hover .sub-menu { display: block; }
@@ -242,11 +245,13 @@ $query = mysqli_query($connect, $sql_loaisp);
 	<div class="container-fluid padding">	
 		<div class="row text-center ">
 			<div class="col-md-4" >
-				<img src="../images/Gonz.png" width=" 50" height="50">
+				<hr class="light"  style="width:100%">
+            <h3>Liên hệ</h3>
+            <hr class="light"  style="width:100%">
 				
-				<p>0977-4090-00</p>
-                <p>mymail@gmail.com</p>
-                <p><a href="https://www.facebook.com/GONZ-108189827644660" target="_blank"><i class="fa fa-facebook-square" style="font-size: 19px;color:white"> Facebook </i></a></p>
+				<p>SĐT: 0977-4090-60</p>
+                <p>Email: Gonz@gmail.com</p>
+                <p><a href="https://www.facebook.com/GONZ-108189827644660" target="_blank"><i class="fa fa-facebook-square" style="font-size: 19px;color:white"> Fanpage Gonz </i></a></p>
 				<p>280 ADV, phường 4, quận 5, Thành phố Hồ Chí Minh</p>
 			</div>
 			<div class="col-md-4">				
