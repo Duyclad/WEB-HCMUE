@@ -256,7 +256,7 @@
 	</div>
 </div>
 <hr>
-
+<p>LỊCH SỬ MUA HÀNG</p>
 <?php
 
 							  while($dong_sp=mysqli_fetch_assoc($donhang)){
@@ -323,7 +323,7 @@
     <p style="font-size:22px"><b>Tên người nhận:</b> <?php echo $dong_sp['Tenngnhan'] ?></p>
     <p style="font-size:22px"><b>Số điện thoại người nhận:</b> <?php echo $dong_sp['Sdtngnhan'] ?></p>
     <p style="font-size:22px"><b>Nơi nhận hàng:</b> <?php echo $dong_sp['Diachingnhan'] ?></p>
-    
+    <p style="font-size:18px"><b>*Ghi chú của bạn:</b> <?php echo $dong_sp['Ghichu'] ?></p>
     <div id="chitiet<?php echo $dong_sp['id'] ?>">
     
                 <div class="row">
