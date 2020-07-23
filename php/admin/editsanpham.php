@@ -31,9 +31,14 @@ if(!isset($_SESSION['Sdt'])){
 
         $Linkanh = $_FILES['avatar']['name'] ;
         $Loaisp = $_POST['Loaisp'];
-        if (isset($_POST['id'])){
+        if (isset($_POST['id']) && $Linkanh!=""){
             $Layid = $_POST['id'];
             $sql=mysqli_query($connect,"UPDATE `sanpham` SET `Tensp` = '$Tensp', `Linkanh` = '$Linkanh',Giasp = '$Giasp',Loaisp = '$Loaisp' WHERE `sanpham`.`id` = '$Layid';");
+            move_uploaded_file($_FILES['avatar']['tmp_name'], '../../images/Sanpham/'.$_FILES['avatar']['name']);
+        }
+        else if(isset($_POST['id']) && $Linkanh==""){
+            $Layid = $_POST['id'];
+            $sql=mysqli_query($connect,"UPDATE `sanpham` SET `Tensp` = '$Tensp', Giasp = '$Giasp',Loaisp = '$Loaisp' WHERE `sanpham`.`id` = '$Layid';");
             move_uploaded_file($_FILES['avatar']['tmp_name'], '../../images/Sanpham/'.$_FILES['avatar']['name']);
         }
         else {
@@ -126,7 +131,7 @@ if(!isset($_SESSION['Sdt'])){
                 $trvanloai = mysqli_query($connect,"select * from loaisp");
                 while ($truyv = mysqli_fetch_assoc($trvanloai)){
                     ?>
-                    <option   value="<?php echo $truyv['idLoai'] ?>"  <?php if($layloai['Loaisp']==$truyv['idLoai']) {echo "selected" ;}?>><?php echo $truyv['Tenloai'] ?></option>
+                    <option   value="<?php echo $truyv['idLoai'] ?>"  <?php if($Sua==1){if ($layloai['Loaisp']==$truyv['idLoai']) {echo "selected" ;}  }  ?>><?php echo $truyv['Tenloai'] ?></option>
                     <?php
                 }
             ?>

@@ -360,7 +360,7 @@ if(!isset($_SESSION['Sdt'])){
                    <th style="border: 1px solid; padding:10px;text-align:center">Email</th>
                     <th style="border: 1px solid; padding:10px;text-align:center">Tiêu đề</th>
                     <th style="border: 1px solid; padding:10px;text-align:center">Nội dung</th>
-                    <th style="border: 1px solid; padding:10px;text-align:center">Trạng thái</th>
+                    
                     <th style="border: 1px solid; padding:10px;text-align:center">Ngày gửi phản hồi</th>
                     <th style="border: 1px solid; padding:10px;text-align:center" colspan="1">Chức năng</th>
                    <?php }
@@ -593,7 +593,7 @@ else if ($menu=="8"){
     <td style="border: 1px solid; padding:10px;text-align:center"><?php echo $dong_sp['Email'] ?></td>
     <td style="border: 1px solid; padding:10px;text-align:center"><?php echo $dong_sp['Tieude']  ?></td>
     <td style="border: 1px solid; padding:10px;text-align:left"><?php echo $dong_sp['Noidung']  ?></td>
-    <td style="border: 1px solid; padding:10px;text-align:center"><?php echo $dong_sp['Trangthai']  ?></td>
+   
     <td style="border: 1px solid; padding:10px;text-align:center"><?php echo $dong_sp['Ngayphanhoi'] ?></td>
    
     <td style="border: 1px solid; padding:10px;text-align:center"><form action="admin.php?menu=<?php echo $menu ?>&id=<?php echo $id ?>&Xoa=1" method="POST"><button type="button" name="submit2" id="submit2<?php echo $id ?>" style="color: red" >Xóa</button><button type="submit" name="submit" id="submit1<?php echo $id ?>" style="color: red" >Xóa</button></form></td>

@@ -152,9 +152,9 @@ $query = mysqli_query($connect, $sql_loaisp);
                 <div class="col-lg-4" >
                     <div class="hero__search" >
                         <div class="hero__search__form" style="margin-top: 5px;">
-                            <form action="#">
-                                <input type="text" placeholder="Tìm kiếm">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                        <form action="Timkiem.php"  method="POST">
+                                <input type="text" placeholder="Tìm kiếm sản phẩm" name="ndungtim" maxlength="50">
+                                <button type="submit" name="search" class="site-btn">SEARCH</button>
                             </form>
                         </div>
                         </div>

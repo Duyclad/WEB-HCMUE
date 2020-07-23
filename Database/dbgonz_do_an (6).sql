@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2020 at 08:34 PM
+-- Generation Time: Jul 23, 2020 at 09:14 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -62,25 +62,6 @@ CREATE TABLE `donmua` (
   `Trangthai` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Đang chuẩn bị'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `donmua`
---
-
-INSERT INTO `donmua` (`id`, `Sdt`, `Tongtien`, `GiamGia`, `Tenngnhan`, `Sdtngnhan`, `Diachingnhan`, `Ghichu`, `Tgdathang`, `Tgiangiao`, `Trangthai`) VALUES
-(42, '0969376729', 202000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-20 14:41:14', '2020-07-23 01:04:24', 'Đã giao'),
-(43, '0969376729', 145000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-20 14:43:39', '2020-07-23 01:05:20', 'Đã giao'),
-(44, '0969376729', 625000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-20 14:49:54', '2020-07-21 14:57:41', 'Đã giao'),
-(45, '0969376729', 57000, 10000, 'DuyCLAD', '0969376729', 'Long An', '', '2020-07-20 14:57:59', NULL, 'Đã giao'),
-(46, '0969376729', 229000, 20000, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-20 16:28:28', NULL, 'Đã hủy'),
-(47, '0969376729', 3017000, 20000, 'DuyCLAD', '0969376729', 'Q5 HCM', 'Giao nhanh nhé!!!', '2020-07-20 20:47:05', '2020-07-23 01:06:03', 'Đã giao'),
-(48, '0969376729', 43000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-21 22:48:31', '2020-07-23 01:14:33', 'Đã giao'),
-(49, '0969376729', 160000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-21 23:06:03', NULL, 'Đã hủy'),
-(50, '0969376729', 72000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-21 23:06:12', '2020-07-22 14:58:00', 'Đã giao'),
-(51, '0969376729', 58000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-21 23:06:22', NULL, 'Đã hủy'),
-(52, '0969376729', 35000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-21 23:15:19', NULL, 'Đã hủy'),
-(53, '0969376729', 35000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-21 23:16:21', NULL, 'Đã hủy'),
-(54, '0969376729', 35000, 0, 'DuyCLAD', '0969376729', 'Q5 HCM', '', '2020-07-21 23:20:59', NULL, 'Đã hủy');
-
 -- --------------------------------------------------------
 
 --
@@ -113,7 +94,7 @@ CREATE TABLE `gioithieu` (
 --
 
 INSERT INTO `gioithieu` (`id`, `Tieude`, `Noidung`, `Showing`) VALUES
-(1, 'CÂU CHUYỆN THƯƠNG HIỆU', 'Tên gọi GONZ xuất phát từ ý nghĩa trong tiếng Hoa là Trà cung đình. Thời xưa, các loại trà tốt nhất thường được các vị hoàng thân quý tộc ngự dùng. Ngày nay, GONZ mong muốn phục vụ các loại trà tốt nhất cho thực khách, cũng như chính tên gọi của thương hiệu. Kể từ khi được thành lập vào năm 2006 tại Đài Loan, chuỗi cửa hàng Gong Cha đã mở rộng trên khắp 19 quốc gia với 1.500 cửa hàng và con số này vẫn tiếp tục tăng trưởng không ngừng. Qua nhiều năm nỗ lực phát triển, GONZ đã trở nên phổ biến với khách hàng từ nhiều quốc gia và trở thành một trong những thương hiệu trà đáng tin cậy hàng đầu trên thế giới.', 'YES'),
+(1, 'CÂU CHUYỆN THƯƠNG HIỆU', 'Tên gọi GONZ xuất phát từ ý nghĩa trong tiếng Hoa là Trà cung đình. Thời xưa, các loại trà tốt nhất thường được các vị hoàng thân quý tộc ngự dùng. Ngày nay, GONZ mong muốn phục vụ các loại trà tốt nhất cho thực khách, cũng như chính tên gọi của thương hiệu. Kể từ khi được thành lập vào năm 2006 tại Đài Loan, chuỗi cửa hàng GONZ đã mở rộng trên khắp 19 quốc gia với 1.500 cửa hàng và con số này vẫn tiếp tục tăng trưởng không ngừng. Qua nhiều năm nỗ lực phát triển, GONZ đã trở nên phổ biến với khách hàng từ nhiều quốc gia và trở thành một trong những thương hiệu trà đáng tin cậy hàng đầu trên thế giới.', 'YES'),
 (2, 'GONZ VIỆT NAM', 'Thương hiệu GONZ được công ty TNHH FIT-HCMUE chính thức đưa vào hoạt động tại thị trường Việt Nam từ ngày 23/7/2020. Trải qua hơn năm năm hoạt động thử nghiệm, công ty TNHH FIT-HCMUE – đơn vị nhượng quyền độc quyền của GONZ tại Việt Nam, đã đưa thương hiệu phát triển nhanh chóng và trở thành một trong những điểm đến thân thuộc của các bạn trẻ yêu thích văn hóa trà sữa và mong muốn trải nghiệm sản phẩm trà uy tín chất lượng với nguồn gốc xuất xứ rõ ràng.', 'YES');
 
 -- --------------------------------------------------------
@@ -136,8 +117,7 @@ INSERT INTO `loaisp` (`idLoai`, `Tenloai`) VALUES
 (2, 'Trà sữa'),
 (3, 'Latteseries'),
 (4, 'Thức uống đá xay'),
-(5, 'Thức uống sáng tạo'),
-(25, 'Loại mới 1');
+(5, 'Thức uống sáng tạo');
 
 -- --------------------------------------------------------
 
@@ -157,8 +137,7 @@ CREATE TABLE `magiamgia` (
 
 INSERT INTO `magiamgia` (`id`, `Code`, `Giamgia`) VALUES
 (1, 'GIAM10K', 10000),
-(2, 'GIAM20K', 20000),
-(7, 'GIAM2K', 2000);
+(2, 'GIAM20K', 20000);
 
 -- --------------------------------------------------------
 
@@ -172,17 +151,8 @@ CREATE TABLE `phanhoi` (
   `Email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `Tieude` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `Noidung` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
-  `Trangthai` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Đang xử lý',
   `Ngayphanhoi` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `phanhoi`
---
-
-INSERT INTO `phanhoi` (`id`, `Ten`, `Email`, `Tieude`, `Noidung`, `Trangthai`, `Ngayphanhoi`) VALUES
-(6, 'tên nè', 'email nè', 'tiêu đề nè', 'hihihi', 'Đang xử lý', '0000-00-00 00:00:00'),
-(7, 'è', 'sfée', 'fèế', 'fêsfse', 'Đang xử lý', '2020-07-20 20:48:43');
 
 -- --------------------------------------------------------
 
@@ -244,8 +214,7 @@ INSERT INTO `sanpham` (`id`, `Tensp`, `Giasp`, `Loaisp`, `Linkanh`, `Luotxem`, `
 (38, 'Trà Xanh', 29000, 1, 'Tra/Tra-Xanh-2.png', 10, 0),
 (39, 'Trà sữa Truyền thống', 39000, 2, 'Trasua/Truyen-Thong.png', 0, 1),
 (40, 'Trà sữa Truyền thống Trân châu', 49000, 2, 'Trasua/Truyen-Thong-Tran-Chau.png', 3, 2),
-(41, 'Trà Xanh Đào', 43000, 5, 'Thucuongsangtao/Xanh-đào-2.png', 3, 3),
-(48, 'SP mới 1', 9000, 25, '108009522_586411428723638_981276625061903655_o.png', 1, 0);
+(41, 'Trà Xanh Đào', 43000, 5, 'Thucuongsangtao/Xanh-đào-2.png', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -269,8 +238,7 @@ CREATE TABLE `taikhoan` (
 
 INSERT INTO `taikhoan` (`Sdt`, `Tentk`, `Diachi`, `Matkhau`, `Vaitro`, `Ngaydangky`, `Quenpass`) VALUES
 ('0123456789', 'ADMIN', 'GONZ address', '202cb962ac59075b964b07152d234b70', 2, '2020-07-21 23:57:29', NULL),
-('0969376729', 'DuyCLAD', 'Q5 HCM', 'c20ad4d76fe97759aa27a0c99bff6710', 0, '2020-07-17 23:17:21', NULL),
-('987654321', 'Staff 1 ', 'GONZ Staff', '202cb962ac59075b964b07152d234b70', 1, '2020-07-22 00:07:22', NULL);
+('0987654321', 'Staff 1 ', 'GONZ Staff', '202cb962ac59075b964b07152d234b70', 1, '2020-07-22 00:07:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -287,46 +255,6 @@ CREATE TABLE `thongtindonhang` (
   `Thanhtien` int(11) NOT NULL,
   `idDonmua` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `thongtindonhang`
---
-
-INSERT INTO `thongtindonhang` (`id`, `idSP`, `Tensp`, `Dongia`, `Sl`, `Thanhtien`, `idDonmua`) VALUES
-(2, 26, 'Trà đen', 25000, 1, 25000, 42),
-(3, 10, 'Trà Bí đao Alisan', 32000, 1, 32000, 42),
-(4, 9, 'Trà Bí đao', 29000, 5, 145000, 42),
-(5, 26, 'Trà đen', 25000, 1, 25000, 43),
-(6, 8, 'Trà Alisan', 29000, 2, 58000, 43),
-(7, 38, 'Trà Xanh', 29000, 1, 29000, 43),
-(8, 28, 'Trà Ô Long', 33000, 1, 33000, 43),
-(9, 38, 'Trà Xanh', 29000, 1, 29000, 44),
-(10, 28, 'Trà Ô Long', 33000, 1, 33000, 44),
-(11, 27, 'Trà Earl Grey', 35000, 1, 35000, 44),
-(12, 26, 'Trà đen', 25000, 13, 325000, 44),
-(13, 9, 'Trà Bí đao', 29000, 7, 203000, 44),
-(14, 26, 'Trà đen', 25000, 1, 25000, 45),
-(15, 10, 'Trà Bí đao Alisan', 32000, 1, 32000, 45),
-(16, 17, 'Trà sữa khoai môn', 49000, 1, 49000, 46),
-(17, 14, 'Khoai môn đá xay', 45000, 4, 180000, 46),
-(18, 41, 'Trà Xanh Đào', 43000, 2, 86000, 47),
-(19, 39, 'Trà sữa Truyền thống', 39000, 1, 39000, 47),
-(20, 4, 'Trà sữa Earl Grey', 53000, 2, 106000, 47),
-(21, 7, 'Trà Alisan xoài', 35000, 1, 35000, 47),
-(22, 9, 'Trà Bí đao', 29000, 31, 899000, 47),
-(23, 6, 'Trà Alisan vải', 35000, 50, 1750000, 47),
-(24, 29, 'Trà sữa Pudding đậu đỏ', 53000, 1, 53000, 47),
-(25, 17, 'Trà sữa khoai môn', 49000, 1, 49000, 47),
-(26, 41, 'Trà Xanh Đào', 43000, 1, 43000, 48),
-(27, 41, 'Trà Xanh Đào', 43000, 1, 43000, 49),
-(28, 39, 'Trà sữa Truyền thống', 39000, 3, 117000, 49),
-(29, 41, 'Trà Xanh Đào', 43000, 1, 43000, 50),
-(30, 8, 'Trà Alisan', 29000, 1, 29000, 50),
-(31, 9, 'Trà Bí đao', 29000, 1, 29000, 51),
-(32, 8, 'Trà Alisan', 29000, 1, 29000, 51),
-(33, 6, 'Trà Alisan vải', 35000, 1, 35000, 52),
-(34, 6, 'Trà Alisan vải', 35000, 1, 35000, 53),
-(35, 7, 'Trà Alisan xoài', 35000, 1, 35000, 54);
 
 -- --------------------------------------------------------
 
@@ -470,7 +398,7 @@ ALTER TABLE `phanhoi`
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `thongtindonhang`
