@@ -217,10 +217,14 @@
 
 </div><hr>
 <script>
+    
+
+
     if ($('#name').val()=='' || $('#phone').val()=='' || $('#address').val()=='' || $('#password').val()=='' || $('#re_password').val()==''){
         $('#submit').attr('disabled','disabled');
         $('#submit').css("background-color", "#999");
         $('#123').html("<b style={\"font-size:24px;\"}>*Chưa nhập đầy đủ thông tin!</b>")
+        
     }
     else{
         if($('#password').val() != $('#re_password').val()){
@@ -237,6 +241,7 @@
        
     }
 
+ 
     $('#name').change(function(){
         if ($('#name').val()=='' || $('#phone').val()=='' || $('#address').val()=='' || $('#password').val()=='' || $('#re_password').val()==''){
         $('#submit').attr('disabled','disabled');
@@ -287,7 +292,7 @@
         $('#123').html("<b style={\"font-size:24px;\"}>*Chưa nhập đầy đủ thông tin!</b>")
     }
     else{
-        if($('#password').val() != $('#re_password').val()){
+         if($('#password').val() != $('#re_password').val()){
             $('#123').html("<b style={\"font-size:24px;\"}>*Mật khẩu không trùng khớp!</b>")
             $('#submit').attr('disabled','disabled');
         $('#submit').css("background-color", "#999");
@@ -329,7 +334,8 @@
         $('#123').html("<b style={\"font-size:24px;\"}>*Chưa nhập đầy đủ thông tin!</b>")
     }
     else{
-        if($('#password').val() != $('#re_password').val()){
+        
+       if($('#password').val() != $('#re_password').val()){
             $('#123').html("<b style={\"font-size:24px;\"}>*Mật khẩu không trùng khớp!</b>")
             $('#submit').attr('disabled','disabled');
         $('#submit').css("background-color", "#999");

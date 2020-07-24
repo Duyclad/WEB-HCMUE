@@ -32,7 +32,9 @@
 <html>
 <head>
     <meta charset="utf-8">
-    
+    <meta property="og:image" content="http://gonz.epizy.com/WEB-HCMUE/images/Gonz.png" />
+<meta property="og:image:width" content="600" />
+<meta property="og:image:height" content="400"; />
     <LINK REL="SHORTCUT ICON" HREF="../images/Gonz.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
