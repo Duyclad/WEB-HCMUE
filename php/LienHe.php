@@ -250,23 +250,125 @@
         <form action="LienHe.php" method="POST">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <input type="text" placeholder="Tên của bạn" name="yourname" maxlength="50">
+                    <input type="text" placeholder="Tên của bạn" name="yourname" id="name" maxlength="50">
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <input type="text" placeholder="Email" name="email" maxlength="100">
+                    <input type="text" placeholder="Email" name="email" id="email" maxlength="100">
                 </div>
                 <div class="col-lg-12 col-md-12">
-                    <input type="text" placeholder="Tiêu đề" name="title" maxlength="50">
+                    <input type="text" placeholder="Tiêu đề" name="title" id="Tieude" maxlength="50">
                 </div>
                 <div class="col-lg-12 text-center">
-                    <textarea placeholder="Nội dung" name="ndung" maxlength="2000"></textarea>
-                    <button type="submit" class="site-btn" name="submit">Phản hồi</button>
+                    <textarea placeholder="Nội dung" name="ndung" id="Noidung" maxlength="2000"></textarea>
+                    <b style="font-size: 24px;" id="123"></b><br>
+                    <button type="submit" class="site-btn" name="submit" id="submit">Phản hồi</button>
                 </div>
             </div>
         </form>
     </div>
 </div><hr>
-  
+<script type="text/javascript"> 
+$('#submit').attr('disabled','disabled');
+$('#submit').css("background-color", "#999");
+$('#email').change(function(){
+    if ($('#name').val() =="" || $('#email').val()=="" || $('#Tieude')=="" || $('#Noidung').val()==""){
+        $('#123').html("Chưa nhập đủ nội dung!");
+             $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+    }
+    else {
+        var email = document.getElementById('email'); 
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
+    if (!filter.test(email.value)) { 
+             $('#123').html("Email không hợp lệ!");
+             $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+             email.focus; 
+             return false; 
+    }
+    else{ 
+        $('#123').html("")
+            $('#submit').removeAttr('disabled');
+        $('#submit').css("background-color", "#f727c3");
+    } 
+    }
+    
+});
+
+$('#name').change(function(){
+    if ($('#name').val() =="" || $('#email').val()=="" || $('#Tieude')=="" || $('#Noidung').val()==""){
+        $('#123').html("Chưa nhập đủ nội dung!");
+             $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+    }
+    else {
+        var email = document.getElementById('email'); 
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
+    if (!filter.test(email.value)) { 
+             $('#123').html("Email không hợp lệ!");
+             $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+             email.focus; 
+             return false; 
+    }
+    else{ 
+        $('#123').html("")
+            $('#submit').removeAttr('disabled');
+        $('#submit').css("background-color", "#f727c3");
+    } 
+    }
+    
+});
+$('#Tieude').change(function(){
+    if ($('#name').val() =="" || $('#email').val()=="" || $('#Tieude')=="" || $('#Noidung').val()==""){
+        $('#123').html("Chưa nhập đủ nội dung!");
+             $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+    }
+    else {
+        var email = document.getElementById('email'); 
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
+    if (!filter.test(email.value)) { 
+             $('#123').html("Email không hợp lệ!");
+             $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+             email.focus; 
+             return false; 
+    }
+    else{ 
+        $('#123').html("")
+            $('#submit').removeAttr('disabled');
+        $('#submit').css("background-color", "#f727c3");
+    } 
+    }
+    
+});
+$('#Noidung').change(function(){
+    if ($('#name').val() =="" || $('#email').val()=="" || $('#Tieude')=="" || $('#Noidung').val()==""){
+        $('#123').html("Chưa nhập đủ nội dung!");
+             $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+    }
+    else {
+        var email = document.getElementById('email'); 
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
+    if (!filter.test(email.value)) { 
+             $('#123').html("Email không hợp lệ!");
+             $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+             email.focus; 
+             return false; 
+    }
+    else{ 
+        $('#123').html("")
+            $('#submit').removeAttr('disabled');
+        $('#submit').css("background-color", "#f727c3");
+    } 
+    }
+    
+});
+
+</script>
 <footer>
 	<div class="container-fluid padding">	
 		<div class="row text-center ">

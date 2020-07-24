@@ -227,6 +227,15 @@
         
     }
     else{
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        var mobile = $('#phone').val()
+        if (vnf_regex.test(mobile) == false) 
+        {
+            $('#123').html("<b style={\"font-size:24px;\"}>*Số điện thoại không hợp lệ!</b>")
+            $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+        }
+        else
         if($('#password').val() != $('#re_password').val()){
             $('#123').html("<b style={\"font-size:24px;\"}>*Mật khẩu không trùng khớp!</b>")
             $('#submit').attr('disabled','disabled');
@@ -249,10 +258,18 @@
         $('#123').html("<b style={\"font-size:24px;\"}>*Chưa nhập đầy đủ thông tin!</b>")
     }
     else{
-        if($('#password').val() != $('#re_password').val()){
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        var mobile = $('#phone').val()
+        if (vnf_regex.test(mobile) == false) 
+        {
+            $('#123').html("<b style={\"font-size:24px;\"}>*Số điện thoại không hợp lệ!</b>")
+            $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+        }
+        else if($('#password').val() != $('#re_password').val()){
             $('#123').html("<b style={\"font-size:24px;\"}>*Mật khẩu không trùng khớp!</b>")
             $('#submit').attr('disabled','disabled');
-        $('#submit').css("background-color", "#999");
+            $('#submit').css("background-color", "#999");
         }
         else{
             $('#123').html("")
@@ -271,6 +288,15 @@
         
     }
     else{
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        var mobile = $('#phone').val()
+        if (vnf_regex.test(mobile) == false) 
+        {
+            $('#123').html("<b style={\"font-size:24px;\"}>*Số điện thoại không hợp lệ!</b>")
+            $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+        }
+        else
         if($('#password').val() != $('#re_password').val()){
             $('#123').html("<b style={\"font-size:24px;\"}>*Mật khẩu không trùng khớp!</b>")
             $('#submit').attr('disabled','disabled');
@@ -292,6 +318,15 @@
         $('#123').html("<b style={\"font-size:24px;\"}>*Chưa nhập đầy đủ thông tin!</b>")
     }
     else{
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        var mobile = $('#phone').val()
+        if (vnf_regex.test(mobile) == false) 
+        {
+            $('#123').html("<b style={\"font-size:24px;\"}>*Số điện thoại không hợp lệ!</b>")
+            $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+        }
+        else
          if($('#password').val() != $('#re_password').val()){
             $('#123').html("<b style={\"font-size:24px;\"}>*Mật khẩu không trùng khớp!</b>")
             $('#submit').attr('disabled','disabled');
@@ -313,6 +348,15 @@
         $('#123').html("<b style={\"font-size:24px;\"}>*Chưa nhập đầy đủ thông tin!</b>")
     }
     else{
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        var mobile = $('#phone').val()
+        if (vnf_regex.test(mobile) == false) 
+        {
+            $('#123').html("<b style={\"font-size:24px;\"}>*Số điện thoại không hợp lệ!</b>")
+            $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+        }
+        else
         if($('#password').val() != $('#re_password').val()){
             $('#123').html("<b style={\"font-size:24px;\"}>*Mật khẩu không trùng khớp!</b>")
             $('#submit').attr('disabled','disabled');
@@ -334,7 +378,15 @@
         $('#123').html("<b style={\"font-size:24px;\"}>*Chưa nhập đầy đủ thông tin!</b>")
     }
     else{
-        
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        var mobile = $('#phone').val()
+        if (vnf_regex.test(mobile) == false) 
+        {
+            $('#123').html("<b style={\"font-size:24px;\"}>*Số điện thoại không hợp lệ!</b>")
+            $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+        }
+        else
        if($('#password').val() != $('#re_password').val()){
             $('#123').html("<b style={\"font-size:24px;\"}>*Mật khẩu không trùng khớp!</b>")
             $('#submit').attr('disabled','disabled');

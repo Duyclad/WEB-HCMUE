@@ -297,7 +297,7 @@ $update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diac
         <div class="container">
             <div class="signup-content">
                               <div style="text-align:right">
-                                   <a href="LSDonHang.php"><button style="border:1px solid; background-color:#f727c3;color:white;padding:5px;border-radius:10px ">Lịch sử mua hàng</button></a>
+                                   <a href="LSDonHang.php"><button style="border:1px solid; background-color:#f727c3;color:white;padding:5px;border-radius:10px;font-size:20px ">Lịch sử mua hàng</button></a>
                               </div>
                
                 <form method="POST" id="signup-form" class="signup-form" action="EditInfo.php">
@@ -324,7 +324,21 @@ $update = mysqli_query($connect,"UPDATE `taikhoan` SET `Tentk` = '$Tentk', `Diac
                     <div class="form-group">
                         <input type="password" class="form-input" maxlength="200" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu mới"/>
                     </div>
-                    
+                    <b id="123"></b><br>
+                    <script>
+                        $('#name').change(function(){
+                            if ($('#name').val()==""){
+                                $('#123').html("Bạn chưa nhập tên tài khoản!");
+             $('#submit').attr('disabled','disabled');
+            $('#submit').css("background-color", "#999");
+                            }
+                            else {
+                                $('#123').html("")
+            $('#submit').removeAttr('disabled');
+        $('#submit').css("background-color", "#f727c3");
+                            }
+                        });
+                    </script>
                     <div class="form-group">
                         <input type="submit" name="submit" id="submit" class="form-submit" value="Xác nhận thay đổi"/>
                     </div>
