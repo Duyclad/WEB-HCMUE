@@ -149,9 +149,9 @@ if(!isset($_SESSION['Sdt'])){
         
         <p style="font-size:24px">Vai trò: </p>
         <select name="Vaitro" id="Vaitro">
-            <option value="0" selected>Khách hàng</option>
-            <option value="1">Nhân viên</option>
-            <option value="2">Quản trị</option>
+            <option value="0" <?php if($Sua==1 && $layloai['Vaitro']=="0"){echo "selected";} ?>>Khách hàng</option>
+            <option value="1" <?php if($Sua==1 && $layloai['Vaitro']=="1"){echo "selected";} ?>>Nhân viên</option>
+            <option value="2" <?php if($Sua==1 && $layloai['Vaitro']=="2"){echo "selected";} ?>>Quản trị</option>
         </select>
             <br><br>
         <button type="submit" name="submit" id="submit1<?php echo $idDM ?>" style="color: red" >LƯU</button>

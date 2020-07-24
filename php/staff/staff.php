@@ -82,7 +82,7 @@
     <LINK REL="SHORTCUT ICON" HREF="../../images/Gonz.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Quản trị - GONZ</title>
+	<title>Nhân viên - GONZ</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
@@ -147,6 +147,7 @@ while($dong_sp=mysqli_fetch_assoc($sql)){
 <hr>
 <div style="width:90%;border-radius:15px;padding:20px;margin:30px;border:3px solid;border-color:#fabbbb">
 
+<button id="inhd<?php echo $idDM ?>"><a href="printbill.php?iddm=<?php echo $idDM ?> " target="_blank" style="font-size:22px">[In hóa đơn]</a></button>
 
 <form method="POST" action="?menu=<?php echo $menu ?>&idDM=<?php echo $idDM ?> " >
     <p style="font-size:22px">* Trạng thái đơn hàng: 
