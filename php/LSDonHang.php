@@ -300,7 +300,7 @@
 
                     $('#submit1<?php echo $idDM ?>').hide();
                     $('#submit2<?php echo $idDM ?>').click(function(){
-                        if (confirm("Bạn có chắc muốn xóa đơn hàng này?")) {
+                        if (confirm("Bạn có chắc muốn hủy đơn hàng này?")) {
                             $('#submit1<?php echo $idDM ?>').click();
                         }
                         else{}
@@ -315,13 +315,29 @@
         else if ($datehour==$time_stamphour+1 && $datemin+60 <= $time_stampmin+5 &&$dong_sp['Trangthai']=="Đang chuẩn bị"){
             ?>
                 <form action="LSDonHang.php" method="POST">
-                <input type="text"  name="phut" id="phut" value="<?php echo $time_stampmin ?>"/>
-                <script>
-                    $('#phut').hide();
-                </script>
-                <button type="submit" name="submit" id="submit" style="color: red" >[Hủy đơn hàng]</button>
+                <input type="text"  name="phut" id="phut<?php echo $idDM ?>" value="<?php echo $time_stampmin ?>"/>
+                <input type="text"  name="gio" id="gio<?php echo $idDM ?>" value="<?php echo $time_stamphour ?>"/>
+                <input type="text"  name="iddm" id="iddm<?php echo $idDM ?>" value="<?php echo $idDM ?>"/>
+                
+                <button type="button" name="submit2" id="submit2<?php echo $idDM ?>" style="color: red" >[Hủy đơn hàng]</button>
+                <button type="submit" name="submit" id="submit1<?php echo $idDM ?>" style="color: red" >[Hủy đơn hàng]</button>
                 <p>*Bạn có thể hủy đơn hàng trong vòng 5 phút kể từ lúc đặt hàng!</p>
+                <script>
+                    $('#phut<?php echo $idDM ?>').hide();
+                    $('#gio<?php echo $idDM ?>').hide();
+                    $('#iddm<?php echo $idDM ?>').hide();
+
+                    $('#submit1<?php echo $idDM ?>').hide();
+                    $('#submit2<?php echo $idDM ?>').click(function(){
+                        if (confirm("Bạn có chắc muốn hủy đơn hàng này?")) {
+                            $('#submit1<?php echo $idDM ?>').click();
+                        }
+                        else{}
+                    });
+                    
+                </script>
                 <hr>
+
             </form>
             <?php
         }
