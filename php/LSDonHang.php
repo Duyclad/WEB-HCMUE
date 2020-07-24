@@ -283,7 +283,7 @@
                               
     <div style="width:90%;border-radius:15px;padding:20px;margin:30px;border:3px solid;border-color:#fabbbb">
     <?php 
-        if ($datehour==$time_stamphour && $datemin <= $time_stampmin+5 && $dong_sp['Trangthai'] != "Đã hủy"){
+        if ($datehour==$time_stamphour && $datemin <= $time_stampmin+5 && $dong_sp['Trangthai'] == "Đang chuẩn bị"){
             ?>
             <form action="LSDonHang.php" method="POST">
                 <input type="text"  name="phut" id="phut<?php echo $idDM ?>" value="<?php echo $time_stampmin ?>"/>
@@ -312,7 +312,7 @@
             </form>
             <?php
         }
-        else if ($datehour==$time_stamphour+1 && $datemin+60 <= $time_stampmin+5 &&$dong_sp['Trangthai']!="Đã hủy"){
+        else if ($datehour==$time_stamphour+1 && $datemin+60 <= $time_stampmin+5 &&$dong_sp['Trangthai']=="Đang chuẩn bị"){
             ?>
                 <form action="LSDonHang.php" method="POST">
                 <input type="text"  name="phut" id="phut" value="<?php echo $time_stampmin ?>"/>
