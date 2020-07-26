@@ -120,8 +120,8 @@ if(!isset($_SESSION['Sdt'])){
         
         <p style="font-size:24px">Hiển thị: </p>
         <select name="show" id="show">
-            <option value="NO" selected>NO</option>
-            <option value="YES">YES</option>
+            <option value="NO"  <?php if ($Sua=="1" && $layloai['Showing']=="NO"){echo "selected";} ?> >NO</option>
+            <option value="YES" <?php if ($Sua=="1" && $layloai['Showing']=="YES"){echo "selected";} ?>>YES</option>
         </select>
             <br><br>
         <button type="submit" name="submit" id="submit1<?php echo $idDM ?>" style="color: red" >LƯU</button>

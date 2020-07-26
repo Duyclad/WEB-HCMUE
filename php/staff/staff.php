@@ -51,7 +51,7 @@
     }
     else if ($menu=="2"){
         $sqlx = mysqli_query($connect,"SELECT * FROM `donmua` where Trangthai = 'Đang giao'");
-        $sql = mysqli_query($connect,"SELECT * FROM `donmua` where Trangthai = 'Đang giao' order by id asc limit ".$item_per_page." offset ".$offset);
+        $sql = mysqli_query($connect,"SELECT * FROM `donmua` where Trangthai = 'Đang giao' order by id desc limit ".$item_per_page." offset ".$offset);
         $sodong = $sqlx -> num_rows;
        
        
@@ -59,7 +59,7 @@
     }
     else if ($menu=="3"){
         $sqlx = mysqli_query($connect,"SELECT * FROM `donmua` where Trangthai = 'Đã giao'");
-        $sql = mysqli_query($connect,"SELECT * FROM `donmua` where Trangthai = 'Đã giao' order by id asc limit ".$item_per_page." offset ".$offset);
+        $sql = mysqli_query($connect,"SELECT * FROM `donmua` where Trangthai = 'Đã giao' order by id desc limit ".$item_per_page." offset ".$offset);
         $sodong = $sqlx -> num_rows;
        
       
@@ -67,7 +67,7 @@
     }
     else if ($menu=="4"){
         $sqlx = mysqli_query($connect,"SELECT * FROM `donmua` where Trangthai = 'Đã hủy'");
-        $sql = mysqli_query($connect,"SELECT * FROM `donmua` where Trangthai = 'Đã hủy' order by id asc limit ".$item_per_page." offset ".$offset);
+        $sql = mysqli_query($connect,"SELECT * FROM `donmua` where Trangthai = 'Đã hủy' order by id desc limit ".$item_per_page." offset ".$offset);
         $sodong = $sqlx -> num_rows;
        
        

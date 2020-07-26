@@ -127,7 +127,7 @@ if(!isset($_SESSION['Sdt'])){
     }
     else if ($menu=="4"){
         $sqlx = mysqli_query($connect,"SELECT * FROM `taikhoan`");
-        $sql = mysqli_query($connect,"SELECT * FROM `taikhoan` order by Ngaydangky asc limit ".$item_per_page." offset ".$offset);
+        $sql = mysqli_query($connect,"SELECT * FROM `taikhoan` order by Vaitro desc limit ".$item_per_page." offset ".$offset);
         $sodong = $sqlx -> num_rows;
         $totalpage = ceil($sodong / $item_per_page);
     }
