@@ -38,11 +38,18 @@ if(!isset($_SESSION['Sdt'])){
         $Vaitro = $_POST['Vaitro'];
         if (isset($_POST['id'])){
             $Layid = $_POST['id'];
-            if(isset($_POST['pass'])){
+            if (isset($_POST['pass'])){
+
+                if($_POST['pass'] != ""  ){
                 $Laypass = $_POST['pass'];
                 $Laypass = md5($Laypass);
                 $sql=mysqli_query($connect,"UPDATE `taikhoan` SET `Sdt` = '$Sdt', `Tentk` = '$Tentk', `Diachi` = '$Diachi', `Matkhau` = '$Laypass', `Vaitro` = '$Vaitro' WHERE `taikhoan`.`Sdt` = '$Layid';");
             }
+            else{
+                $sql=mysqli_query($connect,"UPDATE `taikhoan` SET `Sdt` = '$Sdt', `Tentk` = '$Tentk', `Diachi` = '$Diachi', `Vaitro` = '$Vaitro' WHERE `taikhoan`.`Sdt` = '$Layid';");
+            }
+            }
+            
             else{
                 $sql=mysqli_query($connect,"UPDATE `taikhoan` SET `Sdt` = '$Sdt', `Tentk` = '$Tentk', `Diachi` = '$Diachi', `Vaitro` = '$Vaitro' WHERE `taikhoan`.`Sdt` = '$Layid';");
             }
@@ -142,7 +149,7 @@ if(!isset($_SESSION['Sdt'])){
         <input maxlength="500" type="text"  name="Diachi" style="width:200px;height:30px;margin:20px;padding:10px;border:1px solid" <?php if ($Sua=="1") {echo "value=\"".$layloai['Diachi']."\"";} ?>/>
         <?php if ($Sua=="0" || ($Sua=="1" && $layloai['Vaitro']=="1")||($Sua=="1" && $layloai['Vaitro']=="2")){ ?>
             <p style="font-size:24px">Mật khẩu: </p>
-        <input type="password"  name="pass" id="pass" style="width:200px;height:30px;margin:20px;padding:10px;border:1px solid" value="<?php echo $id ?>"/>
+        <input type="password"  name="pass" id="pass" style="width:200px;height:30px;margin:20px;padding:10px;border:1px solid" />
        
 
         <?php } ?>
